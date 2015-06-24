@@ -1,0 +1,39 @@
+body {
+	
+	padding: 15px 50px;
+	background-color: #cccccc;
+	color: #ffffff;
+	font-family: 'Lato', sans-serif;
+}
+
+#browse-map {
+
+	height: 400px;
+	width: 400px;
+	background-color: #ffffff;
+	float: left;
+
+}
+
+#browse-lists {
+
+	float: left;
+	margin-left: 25px;
+
+}
+
+#browse-lists .visible {
+	font-weight: bold;
+	color: #ffeeee;
+}
+
+ul {
+	list-style-type: none;
+	margin-top: -10px;
+}
+
+li {
+	margin-bottom: 10px;
+	margin-left: -15px;
+	cursor: pointer;
+}

@@ -1,0 +1,67 @@
+<!-- 	Written by Cody M Leff in 2015 for project Forma Urbis Romae
+		at CESTA – Spatial History Lab at Stanford University -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>MapOfRome</title>
+		<meta charset="utf-8" />
+
+		<!-- Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="css/lib/normalize.css">
+		<link rel="stylesheet" href="css/styles.css">
+
+		<!-- Leaflet -->
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	
+	</head>
+
+	<body>
+
+		<!-- Page title; may include navigation bar in later iterations -->
+		<header>
+			<h1>MapOfRome</h1>
+		</header>
+
+		<!-- Element for browsing database using the map -->
+		<h2>Browse</h2>
+		<div id="browse">
+
+			<!-- Element for Leaflet map insertion -->
+			<div class="map" id="browse-map"></div>
+			
+			<!-- Interactors for map visualization interaction -->
+			<div class="" id="browse-lists">
+
+				<!-- List for selecting which layers will be visible -->
+				<h3>Visible Layers</h2>
+				<ul class="" id="browse-selectors-visible"></ul>
+
+				<!-- List for selecting which layer will be selectable
+				<h3>Selectable Layer</h2>
+				<ul class="" id="browse-selectors-selectable"></ul> -->
+
+			</div>
+
+		</div>
+
+		<!-- Handlebars templates -->
+
+		<!-- Libraries: JQuery, Handlebars -->
+		<script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/lib/handlebars-v3.0.3.js"></script>
+
+		<!-- Scripts -->
+		<script type="text/javascript" src="js/layersModel.js"></script>
+		<script type="text/javascript" src="js/mapView.js"></script>
+		<script type="text/javascript" src="js/browseView.js"></script>
+		<script type="text/javascript" src="js/layersController.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+
+	</body>
+
+</html>
