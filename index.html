@@ -38,18 +38,21 @@
 			<div class="" id="browse-lists">
 
 				<!-- List for selecting which layers will be visible -->
-				<h3>Visible Layers</h2>
-				<ul class="" id="browse-selectors-visible"></ul>
-
-				<!-- List for selecting which layer will be selectable
-				<h3>Selectable Layer</h2>
-				<ul class="" id="browse-selectors-selectable"></ul> -->
+				<h3>Layers</h2>
+				<ul class="" id="layer-list"></ul>
 
 			</div>
 
 		</div>
 
 		<!-- Handlebars templates -->
+		<script type="text/x-handlebars-template" id="raster-list-item-template">
+			<li class="layer-visible-list-element" index="{{ index }}">
+				<input type="checkbox" class="visible-checkbox">
+				<span>{{ name }}</span>
+				<input type="range" min="0" max="100" value="100" class="opacity-slider">
+			</li>
+		</script>
 
 		<!-- Libraries: JQuery, Handlebars -->
 		<script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>

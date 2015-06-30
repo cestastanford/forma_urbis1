@@ -7,6 +7,11 @@
 */
 
 var BrowseView = function(layersModel) {
+    /*  Build the Handlebars template compile function for
+    *   the list element.
+    */
+    var rasterListItemTemplate = $('#raster-list-item-template')[0];
+    var renderRasterListItem = Handlebars.compile(rasterListItemTemplate.innerHTML).bind(this);
 
     /*  Reference to the model of the layers.
     */
@@ -14,7 +19,7 @@ var BrowseView = function(layersModel) {
 
     /*  Reference to the HTML elements for the visible list.
     */
-    this.$visibleList = $('#browse-selectors-visible');
+    this.$visibleList = $('#layer-list');
 
     /*  Populates the list with list elements.
     */
@@ -22,16 +27,14 @@ var BrowseView = function(layersModel) {
         this.$visibleList.html('');
         this.layersModel.layers.forEach((function(layer) {
             if (layer.wms) {
-                var $visibleListElement = $('<li></li>');  // create the new element
-                $visibleListElement.attr('index', layer.index);  // attach its index number
-                $visibleListElement.addClass('layer-visible-list-element');
-                if (layer.visible) $visibleListElement.addClass('visible');  // note whether it's visible
-                $visibleListElement.html(layer.name);  // set its text contents to the name
+                var $visibleListElement = $(renderRasterListItem({  // create the new element
+                    name: layer.name,
+                    index: layer.index, // attach its index number
+                }));
                 this.$visibleList.append($visibleListElement);  // add it to the list
             }
         }).bind(this));
     };
 
     this.update();
-
 };

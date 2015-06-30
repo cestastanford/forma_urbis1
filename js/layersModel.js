@@ -14,43 +14,14 @@ var LayersModel = function() {
 
     this.layers = [
         {
-            name: "OSM World WMS",
-            visible: false,
+            name: "Nolli Map (Raster)",
             index: 0,
-            opacity: 100,
             wms: {
-                url: "http://129.206.228.72/cached/osm",
-                layer_name: "osm_auto:all",
+                url: "http://localhost:8080/geoserver/fur/wms",
+                layer_name: "fur:nolli_map_raster",
                 format: "image/png",
-                attribution: "University of Heidelberg"
-            }
-        },
-
-        {
-            name: "Population Density",
-            visible: false,
-            index: 1,
-            opacity: 100,
-            wms: {
-                url: "http://sedac.ciesin.columbia.edu/geoserver/wms",
-                layer_name: "gpw-v3:gpw-v3-population-density_2000",
-                format: "image/png",
-                attribution: "NASA SEDAC"
-            }
-        },
-
-        {
-            name: "Global Agricultural Pastures",
-            visible: false,
-            index: 2,
-            opacity: 100,
-            wms: {
-                url: "http://sedac.ciesin.columbia.edu/geoserver/wms",
-                layer_name: "aglands:aglands-pastures-2000",
-                format: "image/png",
-                attribution: "NASA"
+                attribution: ""
             }
         }
-
     ];
 };
