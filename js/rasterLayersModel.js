@@ -6,22 +6,27 @@
 *
 */
 
-var LayersModel = function() {
+var RasterLayersModel = function() {
 
-    /*  Imports layers from layers source file, returning them
-    *   as an array of layer objects.
+    /*  A JS object containing all the raster layers.
     */
-
     this.layers = [
         {
-            name: "Nolli Map (Raster)",
-            index: 0,
+            name: "Nolli Map",
             wms: {
                 url: "http://localhost:8080/geoserver/fur/wms",
                 layer_name: "fur:nolli_map_raster",
                 format: "image/png",
                 attribution: ""
             }
-        }
+        },
     ];
+
+    /*  Assigns each layer a sequential index number starting 
+    *   at 0.
+    */
+    for (var i = 0; i < this.layers.length; i++) {
+        this.layers[i].index = i;
+    }
+
 };

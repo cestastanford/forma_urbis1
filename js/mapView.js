@@ -6,7 +6,7 @@
 *
 */
 
-var MapView = function(layersModel) {
+var MapView = function(rasterLayersModel) {
     
     var MAP_SELECTOR = 'browse-map';
     var MAP_START_LAT = 41.899152
@@ -24,7 +24,7 @@ var MapView = function(layersModel) {
     */
     this.addedLayers = [];
 
-    /*  Add a layersModel layer object to the map in bitmap (WMS).
+    /*  Add a rasterLayersModel layer object to the map in bitmap (WMS).
     */
     this.addLayer = (function(layer) {
         var newLayer = new L.tileLayer.wms(layer.wms.url,
@@ -60,7 +60,7 @@ var MapView = function(layersModel) {
         layerToSet[0].layer.setOpacity(newOpacity / 100);
     })
 
-
+/*
     //  Testing for WFS
     var url = "http://localhost:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=fur:nolli_points_reprojected&outputFormat=text/javascript&format_options=callback:getJson";
 
@@ -84,9 +84,7 @@ var MapView = function(layersModel) {
                     });
                 }
             }).addTo(this.map);
-            console.log(newLayer);
-            console.log(jsonObject);
         }).bind(this)
     });  
-
+*/
 };

@@ -12,20 +12,20 @@
         
         /*  Creates the model of the layers from the supplied data path.
         */
-        var layersModel = new LayersModel();
+        var rasterLayersModel = new RasterLayersModel();
 
         /*  Creates the map from the layers model.
         */
-        var mapView = new MapView(layersModel);
+        var mapView = new MapView(rasterLayersModel);
 
         /*  Creates the Browse view selection lists from the layers model.
         */
-        var browseView = new BrowseView(layersModel);
+        var browseView = new BrowseView(rasterLayersModel);
 
         /*  Attaches the action listeners to the browse view, allowing the
         *   layer model's controller to receive input from the view.
         */
-        var layersController = new LayersController(layersModel, mapView, browseView);
+        var layersController = new LayersController(rasterLayersModel, mapView, browseView);
 
     });
 })(this, this.document);

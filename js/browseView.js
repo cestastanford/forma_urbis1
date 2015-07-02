@@ -6,16 +6,12 @@
 *
 */
 
-var BrowseView = function(layersModel) {
+var BrowseView = function(rasterLayersModel) {
     /*  Build the Handlebars template compile function for
     *   the list element.
     */
     var rasterListItemTemplate = $('#raster-list-item-template')[0];
     var renderRasterListItem = Handlebars.compile(rasterListItemTemplate.innerHTML).bind(this);
-
-    /*  Reference to the model of the layers.
-    */
-    this.layersModel = layersModel;
 
     /*  Reference to the HTML elements for the visible list.
     */
@@ -25,7 +21,7 @@ var BrowseView = function(layersModel) {
     */
     this.update = function() {
         this.$visibleList.html('');
-        this.layersModel.layers.forEach((function(layer) {
+        rasterLayersModel.layers.forEach((function(layer) {
             if (layer.wms) {
                 var $visibleListElement = $(renderRasterListItem({  // create the new element
                     name: layer.name,
