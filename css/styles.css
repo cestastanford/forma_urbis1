@@ -1,43 +1,45 @@
 body {
-	padding: 15px 50px;
-	background-color: #cccccc;
-	color: #ffffff;
-	font-family: 'Lato', sans-serif;
+    padding: 15px 50px;
+    background-color: #cccccc;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
 }
 
-#browse-map {
-
-	height: 500px;
-	width: 800px;
-	background-color: #ffffff;
-	float: left;
-
+#map-and-layer-list {
+    height: 500px;
+    width: 90vp;
+    margin: auto;
+    position: relative;
 }
 
-#browse-lists {
-
-	float: left;
-	margin-left: 25px;
-
+#map {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
 }
 
-#browse-lists .visible {
-	font-weight: bold;
-	color: #ffeeee;
+#layer-list {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    width: 200px;
+    height: 400px;
+    background-color: #cccccc;
+
 }
 
 ul {
-	list-style-type: none;
-	margin-top: -10px;
+    list-style-type: none;
+    margin-top: -10px;
 }
 
 li {
-	margin-bottom: 10px;
-	margin-left: -15px;
-	cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: -15px;
+    cursor: pointer;
 }
 
 li span {
-	margin-left: 1ch;
-	margin-right: 2ch;
+    margin-left: 1ch;
+    margin-right: 2ch;
 }

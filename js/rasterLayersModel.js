@@ -1,6 +1,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 *   
-*   layersModel.js (JavaScript)
+*   rasterLayersModel.js (JavaScript)
 *   written by Cody M Leff
 *   for project Forma Urbis Romae at CESTA Spatial History Lab
 *

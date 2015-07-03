@@ -6,7 +6,7 @@
 *
 */
 
-var LayersController = function(rasterLayersModel, mapView, browseView) {
+var LayersController = function(rasterLayersModel, mapView, layerListView) {
 
     this.$visibleCheckboxes = $('#layer-list .visible-checkbox');
     this.$opacitySlider = $('#layer-list .opacity-slider')

@@ -1,12 +1,12 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 *   
-*   browseView.js (JavaScript)
+*   layerListView.js (JavaScript)
 *   written by Cody M Leff
 *   for project Forma Urbis Romae at CESTA Spatial History Lab
 *
 */
 
-var BrowseView = function(rasterLayersModel) {
+var LayerListView = function(rasterLayersModel) {
     /*  Build the Handlebars template compile function for
     *   the list element.
     */
