@@ -6,26 +6,52 @@
 *
 */
 
-//  JavaScript execution entry point
+/*  JavaScript execution entry point
+*/
 (function(window, document, undefined) {
     $(document).ready(function() {
         
-        /*  Creates the model of the layers from the supplied data path.
+        /*  Creates the layer model, providing access to the vector
+        *   layers (which have been downloaded to the client browser
+        *   on constructor return) and the dynamically-served raster
+        *   tile layers.  layersData is the global reference to the
+        *   Layers object from layerData.js.
         */
-        var rasterLayersModel = new RasterLayersModel();
+        var layers = new LayerModel(layerData);
 
-        /*  Creates the map from the layers model.
+        /*  Creates the filter model, providing access to the
+        *   filters that are found to be applicable to the layers
+        *   provided from the layer model.
         */
-        var mapView = new MapView(rasterLayersModel);
+        var filters = new FilterModel(layers);
 
-        /*  Creates the Browse view selection lists from the layers model.
+        /*  Creates the layer list view, which populates the layer
+        *   list with the layers found in the layer model; contains
+        *   references to the interactive elements in the list.
         */
-        var browseView = new BrowseView(rasterLayersModel);
+        var layerList = new LayerListView(layers);
 
-        /*  Attaches the action listeners to the browse view, allowing the
-        *   layer model's controller to receive input from the view.
+        /*  Creates the filter list view, which populates the filter
+        *   list with the filters found in the filter model; contains
+        *   references to the interactive elements in the list.
         */
-        var layersController = new LayersController(rasterLayersModel, mapView, browseView);
+        var filterList = new FilterListView(filters);
+
+        /*  Creates the map view, which creates and updates the Leaflet
+        *   map.
+        */
+        var map = new MapView();
+
+        /*  Creates the map controller, which receives interaction events
+        *   from the layer list and filter lists views, applies the
+        *   indicated filters to the indicated layers, then sends raster
+        *   and vector data to the map view to update with.
+        */
+        var controller = new MapController(layers, filters, layerList, filterList, map);
+
+        /*  Displays an initial map.
+        */
+        controller.displayInitialMap();
 
     });
 })(this, this.document);

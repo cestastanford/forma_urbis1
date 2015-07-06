@@ -23,23 +23,22 @@ body {
     top: 25px;
     left: 25px;
     width: 200px;
-    height: 400px;
+    height: 300px;
     background-color: #cccccc;
-
+    padding: 25px;
 }
 
-ul {
-    list-style-type: none;
-    margin-top: -10px;
+#layer-list-label {
+    margin: 0px;
 }
 
-li {
-    margin-bottom: 10px;
-    margin-left: -15px;
-    cursor: pointer;
+#filter-list {
+    background-color: #dddddd;
+    width: 90vp;
+    margin: auto;
+    height: 200px;
 }
 
-li span {
-    margin-left: 1ch;
-    margin-right: 2ch;
+#filter-list-label {
+    padding: 25px;
 }

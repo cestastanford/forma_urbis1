@@ -37,8 +37,9 @@
                  floats on top of map. -->
             <div id="layer-list">
 
-                <!-- List for selecting which layers will be visible -->
                 <h3 id="layer-list-label">Layers</h3>
+
+                <!-- Dynamically generated -->
                 <ul id="layer-list-elements"></ul>
 
             </div>
@@ -47,28 +48,24 @@
 
         <!-- Div containing the layer filter options; this element is
              dynamically generated. -->
-        <div id="filters">
+        <div id="filter-list">
+
+            <h3 id="filter-list-label">Filters</h3>
+
+            <!-- Dynamically generated -->
+            <ul id="filter-list-elements"></ul>
+
         </div>
 
 
         <!-- Handlebars templates -->
-        <script type="text/x-handlebars-template" id="raster-list-item-template">
-            <li class="layer-visible-list-element" index="{{ index }}">
-                <input type="checkbox" class="visible-checkbox">
-                <span>{{ name }}</span>
-                <input type="range" min="0" max="100" value="100" class="opacity-slider">
-            </li>
-        </script>
 
         <!-- Libraries: JQuery, Handlebars -->
         <script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/lib/handlebars-v3.0.3.js"></script>
 
         <!-- Scripts -->
-        <script type="text/javascript" src="js/rasterLayersModel.js"></script>
-        <script type="text/javascript" src="js/mapView.js"></script>
-        <script type="text/javascript" src="js/browseView.js"></script>
-        <script type="text/javascript" src="js/layersController.js"></script>
+
         <script type="text/javascript" src="js/main.js"></script>
 
     </body>
