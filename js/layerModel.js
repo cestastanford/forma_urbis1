@@ -21,12 +21,47 @@ var LayerModel = function(layerData) {
 	this.raster = layerData.raster;
 
 	/*	Downloads the vector layers via WFS using the parameters in
-	*	the data file.
+	*	the data file, with each layer as an object containing a
+	*	reference to the layer data from the data file and the
+	*	downloaded GeoJSON FeatureCollection.
 	*/
 	this.vector = [];
-	layerData.vector.forEach(function(vectorLayer) {
-		
-	})
+	layerData.vector.forEach((function(vectorLayer) {
+		$.ajax($.extend({}, vectorLayer.wfsParameters, {
+			type: 'GET',
+        	dataType: 'jsonp',
+        	jsonpCallback: 'getJson',
+        	success: (function(jsonObject) {
+        		newLayer = {
+        			layerInfo: vectorLayer,
+        			geoJSON: jsonObject
+        		};
+        		this.vector.push(newLayer);
+        		console.log(this.vector);
+            }).bind(this)
+        }));
+	}).bind(this));
 
+	/*	Object method to retrieve an array of the raster layers
+	*	matching the supplied array of indices.
+	*/
+	this.getRasterLayers = function(indices) {
+		var layersToReturn = [];
+		indices.forEach(function(index) {
+			layersToReturn.push(this.raster[index]);
+		});
+		return layersToReturn;
+	};
+
+	/*	Object method to retrieve an array of the vector layers
+	*	matching the supplied array of indices.
+	*/
+	this.getVectorLayers = function(indices) {
+		var layersToReturn = [];
+		indices.forEach(function(index) {
+			layersToReturn.push(this.vector[index]);
+		});
+		return layersToReturn;
+	};
 
 };
