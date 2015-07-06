@@ -11,13 +11,17 @@
 (function(window, document, undefined) {
     $(document).ready(function() {
         
+        /*  Link to data object from data file.
+        */
+        var data = dataFileObject;
+
         /*  Creates the layer model, providing access to the vector
         *   layers (which have been downloaded to the client browser
         *   on constructor return) and the dynamically-served raster
         *   tile layers.  layersData is the global reference to the
         *   Layers object from layerData.js.
         */
-        var layers = new LayerModel(layerData);
+        var layers = new LayerModel(data.layerData);
 
         /*  Creates the filter model, providing access to the
         *   filters that are found to be applicable to the layers
