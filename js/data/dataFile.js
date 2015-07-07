@@ -91,6 +91,51 @@ var dataFileObject = {
 
         ]
 
+    },
+
+    filterData: {
+
+        time: {
+
+            //  tests if feature's time is before input time
+            isBefore: function(data, input) {
+                return (data < input);
+            }
+
+            //  tests if feature's time is after input time
+            isAfter: function(data, input) {
+                return (data > input);
+            }
+
+            //  tests if feature's time is equal to input time
+            isEqual: function(data, input) {
+                return (data === input);
+            }
+
+        }
+
+        text: {
+
+            //  tests if feature's text contains the input text
+            containsText: function(data, input) {
+                return (data.indexOf(input) > -1);
+            }
+
+        }
+
+        location: {
+
+            //  tests if feature's location (lat/lon) is within
+            //  an input range of the input location.
+            isInRange: function(dataX, dataY, inputX, inputY, range) {
+                var diffX = dataX - inputX;
+                var diffY = dataY - inputY;
+                var magnitude = Math.sqrt(diffX * diffX + diffY * diffY);
+                return (magnitude <= range);
+            }
+
+        }
+
     }
 
 };
