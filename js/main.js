@@ -27,7 +27,7 @@
         *   filters that are found to be applicable to the layers
         *   provided from the layer model.
         */
-//        var filters = new FilterModel(layers);
+        var filters = new FilterModel(layers, data.filterData);
 
         /*  Creates the layer list view, which populates the layer
         *   list with the layers found in the layer model; contains

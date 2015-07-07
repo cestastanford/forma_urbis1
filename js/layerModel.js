@@ -22,8 +22,8 @@ var LayerModel = function(layerData) {
 
 	/*	Downloads the vector layers via WFS using the parameters in
 	*	the data file, with each layer as an object containing a
-	*	reference to the layer data from the data file and the
-	*	downloaded GeoJSON FeatureCollection.
+	*	the layer data from the data file and the downloaded GeoJSON
+	*	FeatureCollection.
 	*/
 	this.vector = [];
 	layerData.vector.forEach((function(vectorLayer) {
@@ -32,12 +32,9 @@ var LayerModel = function(layerData) {
         	dataType: 'jsonp',
         	jsonpCallback: 'getJson',
         	success: (function(jsonObject) {
-        		newLayer = {
-        			layerInfo: vectorLayer,
-        			geoJSON: jsonObject
-        		};
-        		this.vector.push(newLayer);
-        		console.log(this.vector);
+        		vectorLayer.geoJSON = jsonObject;
+        		this.vector.push(vectorLayer);
+        		console.log(this);
             }).bind(this)
         }));
 	}).bind(this));
