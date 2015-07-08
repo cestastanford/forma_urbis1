@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*   
+*
 *   main.js (JavaScript)
 *   written by Cody M Leff
 *   for project Forma Urbis Romae at CESTA - Spatial History Lab
@@ -10,7 +10,7 @@
 */
 (function(window, document, undefined) {
     $(document).ready(function() {
-        
+
         /*  Link to data object from data file.
         */
         var data = dataFileObject;
@@ -21,13 +21,17 @@
         *   tile layers.  layersData is the global reference to the
         *   Layers object from layerData.js.
         */
-        var layers = new LayerModel(data.layerData);
+
+        //  For testing: next step is a callback.
+        var layers = new LayerModel(data.layerData, function() {
+            var filters = new FilterModel(layers, data.filterData);
+        });
 
         /*  Creates the filter model, providing access to the
         *   filters that are found to be applicable to the layers
         *   provided from the layer model.
         */
-        var filters = new FilterModel(layers, data.filterData);
+//        var filters = new FilterModel(layers, data.filterData);
 
         /*  Creates the layer list view, which populates the layer
         *   list with the layers found in the layer model; contains

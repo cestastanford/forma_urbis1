@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*   
+*
 *   layerModel.js (JavaScript)
 *   written by Cody M Leff
 *   for project Forma Urbis Romae at CESTA - Spatial History Lab
@@ -12,7 +12,7 @@
 *	downloaded vector data from the WFS layers.  Metadata for each
 *	layer is contained here as well.
 */
-var LayerModel = function(layerData) {
+var LayerModel = function(layerData, callback) {
 
 	/*	Creates a reference to the list of raster tile layers, with
 	*	metadata and WMS access parameters for each.  This data
@@ -34,7 +34,8 @@ var LayerModel = function(layerData) {
         	success: (function(jsonObject) {
         		vectorLayer.geoJSON = jsonObject;
         		this.vector.push(vectorLayer);
-        		console.log(this);
+        		console.log("layerModel: ", this);
+        		callback();
             }).bind(this)
         }));
 	}).bind(this));
