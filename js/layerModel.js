@@ -7,39 +7,61 @@
 */
 
 
-/*	The object that describes the connection parameters to access
+/*
+*   The object that describes the connection parameters to access
 *	the WMS server for each raster layer, and contains the
 *	downloaded vector data from the WFS layers.  Metadata for each
 *	layer is contained here as well.
 */
-var LayerModel = function(layerData, callback) {
+var LayerModel = function(layerData) {
 
-	/*	Creates a reference to the list of raster tile layers, with
-	*	metadata and WMS access parameters for each.  This data
-	*	should be already correctly-formatted from the data file.
-	*/
-	this.raster = layerData.raster;
+    /*
+    *   Saved reference to the layer data store.
+    */
+    this.layerData = layerData;
 
-	/*	Downloads the vector layers via WFS using the parameters in
-	*	the data file, with each layer as an object containing a
-	*	the layer data from the data file and the downloaded GeoJSON
-	*	FeatureCollection.
-	*/
-	this.vector = [];
-	layerData.vector.forEach((function(vectorLayer) {
-		$.ajax($.extend({}, vectorLayer.wfsParameters, {
-			type: 'GET',
-        	dataType: 'jsonp',
-        	jsonpCallback: 'getJson',
-        	success: (function(jsonObject) {
-        		vectorLayer.geoJSON = jsonObject;
-        		this.vector.push(vectorLayer);
-        		callback();
-            }).bind(this)
-        }));
-	}).bind(this));
+    /*
+    *   Definition of the init method to begin layer prepration;
+    *   calls the passed callback to begin filter preparation.
+    */
+    this.init = (function(filters, callback) {
 
-	/*	Object method to retrieve an array of the raster layers
+        /*
+        *   Creates a reference to the list of raster tile layers, with
+        *   metadata and WMS access parameters for each.  This data
+        *   should be already correctly-formatted from the data file.
+        */
+        this.raster = this.layerData.raster;
+
+        /*
+        *   Downloads the vector layers via WFS using the parameters in
+        *   the data file, with each layer as an object containing a
+        *   the layer data from the data file and the downloaded GeoJSON
+        *   FeatureCollection.
+        */
+        this.vector = [];
+        this.layerData.vector.forEach((function(vectorLayer) {
+            $.ajax($.extend({}, vectorLayer.wfsParameters, {
+                type: 'GET',
+                dataType: 'jsonp',
+                jsonpCallback: 'getJson',
+                success: (function(jsonObject) {
+                    vectorLayer.geoJSON = jsonObject;
+                    this.vector.push(vectorLayer);
+
+                    //  Load filters after layers have been prepared.
+                    filters.init.call(filters, callback);
+
+                }).bind(this)
+            }));
+        }).bind(this));
+
+    }).bind(this);
+
+
+
+	/*
+    *   Object method to retrieve an array of the raster layers
 	*	matching the supplied array of indices.
 	*/
 	this.getRasterLayers = function(indices) {
@@ -50,7 +72,8 @@ var LayerModel = function(layerData, callback) {
 		return layersToReturn;
 	};
 
-	/*	Object method to retrieve an array of the vector layers
+	/*
+    *   Object method to retrieve an array of the vector layers
 	*	matching the supplied array of indices.
 	*/
 	this.getVectorLayers = function(indices) {

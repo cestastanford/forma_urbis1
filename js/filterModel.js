@@ -8,21 +8,44 @@
 
 var FilterModel = function(layers, filterData) {
 
-    /*  Loops through each described field in each vector layer,
-    *   adding that layer to the field's type's 'applicable' list
-    *   in filterData, then adds the type name to activeFilterTypes.
+    /*
+    *   Saved references to the layers model and the filter data
+    *   store.
+    */
+    this.layers = layers;
+    this.filterData = filterData;
+
+    /*
+    *   List of the filter types that have at least one applicable
+    *   layer attribute.
     */
     this.activeFilterTypes = {};
 
-	layers.vector.forEach((function(vectorLayer) {
+    /*
+    *   Definition of the init method to begin filter preparation
+    *   following layer prearation.  Called by LayerModel.init().
+    */
+    this.init = function(initViews) {
 
-        vectorLayer.fields.forEach((function(field) {
+        /*
+        *   Loops through each described field in each vector layer,
+        *   adding that layer to the field's type's 'applicable' list
+        *   in filterData, then adds the type name to activeFilterTypes.
+        */
+    	this.layers.vector.forEach((function(vectorLayer) {
 
-            filterData.types[field.type].applicable.push(field);
-            this.activeFilterTypes[field.type] = 'active';
+            vectorLayer.fields.forEach((function(field) {
+
+                this.filterData.types[field.type].applicable.push(field);
+                this.activeFilterTypes[field.type] = 'active';
+
+            }).bind(this));
 
         }).bind(this));
 
-    }).bind(this));
+        //  Load views after filters have been prepared.
+        initViews();
+
+    };
 
 };
