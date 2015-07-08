@@ -162,7 +162,7 @@ var dataFileObject = {
                     //     displayName: 'Nolli Number',
                     //     description: 'The Nolli Number of the feature from the Nolli Map (same as Nolli ID).'
                     // },
-                    {
+                    // {
                     //     name: 'PERIOD',
                     //     type: 'time',
                     //     subtype: 'period',
@@ -234,8 +234,8 @@ var dataFileObject = {
                     containsText: function(data, input) {
                         return (data.indexOf(input) > -1);
                     }
-                }
-                applicable: [];
+                },
+                applicable: []
 
             }
 

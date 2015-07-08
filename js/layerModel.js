@@ -34,7 +34,6 @@ var LayerModel = function(layerData, callback) {
         	success: (function(jsonObject) {
         		vectorLayer.geoJSON = jsonObject;
         		this.vector.push(vectorLayer);
-        		console.log("layerModel: ", this);
         		callback();
             }).bind(this)
         }));

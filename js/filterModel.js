@@ -8,37 +8,21 @@
 
 var FilterModel = function(layers, filterData) {
 
-    /*  Loops through each vector layer, adding the applicable
-    *   filters for each field that is described in 'fields' to
-    *   the activeFilters list, and noting the fields it can be
-    *   used on.
+    /*  Loops through each described field in each vector layer,
+    *   adding that layer to the field's type's 'applicable' list
+    *   in filterData, then adds the type name to activeFilterTypes.
     */
-    this.activeFilterTypes = [];
+    this.activeFilterTypes = {};
 
-    //  check through each vector layer
-	layers.vector.forEach(function(vectorLayer) {
+	layers.vector.forEach((function(vectorLayer) {
 
-        //  check through each described field in that layer
-        vectorLayer.fields.forEach(function(field) {
+        vectorLayer.fields.forEach((function(field) {
 
-            //  check if that field's type matches a filter type
-            if (filterData.types.hasOwnProperty(field.type)) {
+            filterData.types[field.type].applicable.push(field);
+            this.activeFilterTypes[field.type] = 'active';
 
-                var filterType = filterData.types.[field.type];
+        }).bind(this));
 
-                var matchingFilter = this.activeFilterTypes.filter(function(existingFilterType) {
-                    if ()
-                })
-
-                //  else: add new filter
-
-                filterType.applicable.push(field);
-                this.activeFilterTypes.push(filterType);
-
-            }
-        });
-    });
+    }).bind(this));
 
 };
-
-//HELP!!!!!
