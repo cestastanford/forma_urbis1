@@ -17,14 +17,14 @@
         <!-- Leaflet -->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
-    
+
     </head>
 
     <body>
 
         <!-- Page title -->
         <header>
-            <h1>MapOfRome</h1>
+            <h1 id="page-title">MapOfRome</h1>
         </header>
 
         <!-- Div containing the map and the layer selection list -->
@@ -32,15 +32,16 @@
 
             <!-- Element for Leaflet map insertion -->
             <div id="map"></div>
-            
-            <!-- Interactive list for selecting which layers to display; 
+
+            <!-- Interactive list for selecting which layers to display;
                  floats on top of map. -->
             <div id="layer-list">
 
-                <h3 id="layer-list-label">Layers</h3>
+                <h3 class="label">Layers</h3>
+                <hr>
 
                 <!-- Dynamically generated -->
-                <ul id="layer-list-elements"></ul>
+                <ul class="list"></ul>
 
             </div>
 
@@ -50,15 +51,23 @@
              dynamically generated. -->
         <div id="filter-list">
 
-            <h3 id="filter-list-label">Filters</h3>
+            <h3 class="label">Filters</h3>
+            <hr>
 
             <!-- Dynamically generated -->
-            <ul id="filter-list-elements"></ul>
+            <ul class="list"></ul>
 
         </div>
 
 
         <!-- Handlebars templates -->
+        <script type="text/x-handlebars-template" id="raster-layer-template">
+            <li class="layer-visible-list-element" index="{{ index }}">
+                <input type="checkbox" class="visible-checkbox">
+                <span>{{ name }}</span>
+                <input type="range" min="0" max="100" value="100" class="opacity-slider" style="visibility: collapse;">
+            </li>
+        </script>
 
         <!-- Libraries: JQuery, Handlebars -->
         <script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>
@@ -70,6 +79,7 @@
         <!-- Scripts -->
         <script type="text/javascript" src="js/layerModel.js"></script>
         <script type="text/javascript" src="js/filterModel.js"></script>
+        <script type="text/javascript" src="js/layerListView.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
 
     </body>

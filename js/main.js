@@ -44,7 +44,7 @@
             *   list with the layers found in the layer model; contains
             *   references to the interactive elements in the list.
             */
-    //        var layerList = new LayerListView(layers);
+            var layerList = new LayerListView(layers);
 
             /*
             *   Creates the filter list view, which populates the filter
@@ -67,10 +67,10 @@
             */
     //        var controller = new MapController(layers, filters, layerList, filterList, map);
 
+            /*
+            *   Displays an initial map from the initial map settings.
+            */
     //        controller.displayInitialMap();
-
-           console.log('Callback called!');
-           console.log(layers, filters);
 
         });
 

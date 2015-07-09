@@ -38,6 +38,12 @@ var dataFileObject = {
                         transparent: true
                     }
                 }
+            },
+            {
+                name: "Another sample map!",
+                wmsParameters: {
+                    none: 'none'
+                }
             }
         ],
 

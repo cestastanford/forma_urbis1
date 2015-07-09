@@ -1,14 +1,26 @@
 body {
-    padding: 15px 50px;
     background-color: #cccccc;
     color: #ffffff;
     font-family: 'Lato', sans-serif;
+    padding: 1rem;
+}
+
+ul {
+    padding: 0rem;
+}
+
+li {
+    list-style-type: none;
+}
+
+#page-title {
+    margin: 1rem;
 }
 
 #map-and-layer-list {
-    height: 500px;
-    width: 90vp;
-    margin: auto;
+    width: 100vp;
+    height: 25rem;
+    margin: 1rem;
     position: relative;
 }
 
@@ -20,25 +32,26 @@ body {
 
 #layer-list {
     position: absolute;
-    top: 25px;
-    left: 25px;
-    width: 200px;
-    height: 300px;
+    top: 2rem;
+    left: 2rem;
+    width: 10rem;
+    height: 15rem;
     background-color: #cccccc;
-    padding: 25px;
+    padding: 1rem;
 }
 
-#layer-list-label {
-    margin: 0px;
+#layer-list .label {
+    margin: 0rem;
 }
 
 #filter-list {
     background-color: #dddddd;
-    width: 90vp;
-    margin: auto;
-    height: 200px;
+    width: 100vp;
+    height: 20rem;
+    padding: 1rem;
+    margin: 1rem;
 }
 
-#filter-list-label {
-    padding: 25px;
+#filter-list .label {
+    margin: 0rem;
 }
