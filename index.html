@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>MapOfRome</title>
+        <title>Forma Urbis Romae</title>
         <meta charset="utf-8" />
 
         <!-- Fonts -->
@@ -24,7 +24,7 @@
 
         <!-- Page title -->
         <header>
-            <h1 id="page-title">MapOfRome</h1>
+            <h1 id="page-title">Forma Urbis Romae</h1>
         </header>
 
         <!-- Div containing the map and the layer selection list -->
@@ -57,17 +57,20 @@
             <!-- Dynamically generated -->
             <ul class="list"></ul>
 
+            <hr>
+            <button type="submit">Filter Results</button>
+
         </div>
 
 
         <!-- Handlebars templates -->
         <script type="text/x-handlebars-template" id="layer-template">
             <li class="layer" index="{{ index }}">
-                <input class="layer-checkbox" type="checkbox" class="visible-checkbox">
-                <span class="layer-name">{{name}}</span>
-                {{#if raster}}<span class="layer-type-marker raster">ⓡ</span>
-                {{else}}<span class="layer-type-marker vector">ⓥ</span>
-                {{/if}}
+            <input class="layer-checkbox" type="checkbox" class="visible-checkbox">
+            <span class="layer-name">{{name}}</span>
+            {{#if raster}}<span class="layer-type-marker raster">ⓡ</span>
+            {{else}}<span class="layer-type-marker vector">ⓥ</span>
+            {{/if}}
             </li>
         </script>
 
@@ -76,12 +79,14 @@
         <script type="text/javascript" src="js/lib/handlebars-v3.0.3.js"></script>
 
         <!-- Data files -->
-        <script type="text/javascript" src="js/data/dataFile.js"></script>
+        <script type="text/javascript" src="js/data/layerDataFile.js"></script>
+        <script type="text/javascript" src="js/data/filterDataFile.js"></script>
 
         <!-- Scripts -->
         <script type="text/javascript" src="js/layerModel.js"></script>
         <script type="text/javascript" src="js/filterModel.js"></script>
         <script type="text/javascript" src="js/layerListView.js"></script>
+        <script type="text/javascript" src="js/filterListView.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
 
     </body>

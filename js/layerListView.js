@@ -26,7 +26,6 @@ var LayerListView = function(layers) {
     for (var i = 0; i < layers.raster.length; i++) {
         var $rasterElement = $(renderLayer({
             name: layers.raster[i].name,
-            type: 'raster',
             index: i,
             raster: true
         }));
@@ -34,8 +33,7 @@ var LayerListView = function(layers) {
     }
     for (var i = 0; i < layers.vector.length; i++) {
         var $vectorElement = $(renderLayer({
-            name: layers.raster[i].name,
-            type: 'raster',
+            name: layers.vector[i].name,
             index: i,
             raster: false
         }));

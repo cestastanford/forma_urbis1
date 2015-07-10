@@ -13,9 +13,10 @@
     $(document).ready(function() {
 
         /*
-        *   Link to data object from data file.
+        *   Link to data objects from data files.
         */
-        var data = dataFileObject;
+        var layerData = layerDataFileObject;
+        var filterData = filterDataFileObject;
 
         /*
         *   Creates the layer model, providing access to the vector
@@ -24,14 +25,14 @@
         *   tile layers.  layersData is the global reference to the
         *   Layers object from layerData.js.
         */
-        var layers = new LayerModel(data.layerData);
+        var layers = new LayerModel(layerData);
 
         /*
         *   Creates the filter model, providing access to the
         *   filters that are found to be applicable to the layers
         *   provided from the layer model.
         */
-        var filters = new FilterModel(layers, data.filterData);
+        var filters = new FilterModel(layers, filterData);
 
         /*
         *   Starts the asynchronous loading of modules dependent
@@ -51,7 +52,7 @@
             *   list with the filters found in the filter model; contains
             *   references to the interactive elements in the list.
             */
-    //        var filterList = new FilterListView(filters);
+            var filterList = new FilterListView(filters);
 
             /*
             *   Creates the map view, which creates and updates the Leaflet
