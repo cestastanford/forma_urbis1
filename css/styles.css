@@ -13,6 +13,12 @@ li {
     list-style-type: none;
 }
 
+hr {
+    height: 1px;
+    background-color: #ffffff;
+    border: none;
+}
+
 #page-title {
     margin: 1rem;
 }
@@ -34,8 +40,8 @@ li {
     position: absolute;
     top: 2rem;
     left: 2rem;
-    width: 10rem;
-    height: 15rem;
+    width: 15rem;
+    height: 18rem;
     background-color: #cccccc;
     padding: 1rem;
 }
@@ -54,4 +60,21 @@ li {
 
 #filter-list .label {
     margin: 0rem;
+}
+
+.layer {
+    position: relative;
+    margin-bottom: .5rem;
+}
+
+.layer-checkbox {
+    position: relative;
+    bottom: .1rem;
+    margin: .1rem;
+}
+
+.layer-type-marker {
+    position: absolute;
+    top: .1rem;
+    right: .5rem;
 }

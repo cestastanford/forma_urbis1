@@ -61,11 +61,13 @@
 
 
         <!-- Handlebars templates -->
-        <script type="text/x-handlebars-template" id="raster-layer-template">
-            <li class="layer-visible-list-element" index="{{ index }}">
-                <input type="checkbox" class="visible-checkbox">
-                <span>{{ name }}</span>
-                <input type="range" min="0" max="100" value="100" class="opacity-slider" style="visibility: collapse;">
+        <script type="text/x-handlebars-template" id="layer-template">
+            <li class="layer" index="{{ index }}">
+                <input class="layer-checkbox" type="checkbox" class="visible-checkbox">
+                <span class="layer-name">{{name}}</span>
+                {{#if raster}}<span class="layer-type-marker raster">ⓡ</span>
+                {{else}}<span class="layer-type-marker vector">ⓥ</span>
+                {{/if}}
             </li>
         </script>
 
