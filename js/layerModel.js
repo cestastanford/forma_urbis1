@@ -59,29 +59,28 @@ var LayerModel = function(layerData) {
     }).bind(this);
 
 
+	// /*
+ //    *   Object method to retrieve an array of the raster layers
+	// *	matching the supplied array of indices.
+	// */
+	// this.getRasterLayers = function(indices) {
+	// 	var layersToReturn = [];
+	// 	indices.forEach(function(index) {
+	// 		layersToReturn.push(this.raster[index]);
+	// 	});
+	// 	return layersToReturn;
+	// };
 
-	/*
-    *   Object method to retrieve an array of the raster layers
-	*	matching the supplied array of indices.
-	*/
-	this.getRasterLayers = function(indices) {
-		var layersToReturn = [];
-		indices.forEach(function(index) {
-			layersToReturn.push(this.raster[index]);
-		});
-		return layersToReturn;
-	};
-
-	/*
-    *   Object method to retrieve an array of the vector layers
-	*	matching the supplied array of indices.
-	*/
-	this.getVectorLayers = function(indices) {
-		var layersToReturn = [];
-		indices.forEach(function(index) {
-			layersToReturn.push(this.vector[index]);
-		});
-		return layersToReturn;
-	};
+	// /*
+ //    *   Object method to retrieve an array of the vector layers
+	// *	matching the supplied array of indices.
+	// */
+	// this.getVectorLayers = function(indices) {
+	// 	var layersToReturn = [];
+	// 	indices.forEach(function(index) {
+	// 		layersToReturn.push(this.vector[index]);
+	// 	});
+	// 	return layersToReturn;
+	// };
 
 };

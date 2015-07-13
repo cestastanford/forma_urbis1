@@ -8,19 +8,25 @@
 
 var FilterListView = function(filters) {
 
-    //  Constants
-    var FILTER_TYPE = 'filter-type';
+    /*
+    *   Downloads filter template and compiles it, supplying the
+    *   list of applicable fields for use by the template if
+    *   needed.
+    */
+
+    function compileTemplateData(filterType) {
+
+    };
 
     /*
-    *   Handlebars compile functions for the filters.
+    *   Adds each compiled filter template to the DOM.
     */
-    var $layerTemplates = $('.filter-template');
-    this.renderFilters = {};
-    $layerTemplates.each((function(index, layerTemplate) {
-        this.renderFilters[layerTemplate.getAttribute('filter-type')] =
-            Handlebars.compile(layerTemplate.innerHTML);
-    }).bind(this));
 
+    Object.keys(filters.activeFilterTypes).forEach(function(filterType) {
 
+        var filterElement = Handlebars.templates[filterType]();
+        $('#filter-list .list').append(filterElement);
+
+    });
 
 };

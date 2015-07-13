@@ -30,14 +30,15 @@ var FilterModel = function(layers, filterData) {
         /*
         *   Loops through each described field in each vector layer,
         *   adding that layer to the field's type's 'applicable' list
-        *   in filterData, then adds the type name to activeFilterTypes.
+        *   in filterData, then adds the type object to activeFilterTypes.
         */
     	this.layers.vector.forEach((function(vectorLayer) {
 
             vectorLayer.fields.forEach((function(field) {
 
-                this.filterData.types[field.type].applicable.push(field);
-                this.activeFilterTypes[field.type] = 'active';
+                var filterType = this.filterData.types[field.type];
+                filterType.applicable.push(field);
+                this.activeFilterTypes[field.type] = filterType;
 
             }).bind(this));
 

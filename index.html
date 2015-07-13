@@ -63,20 +63,13 @@
         </div>
 
 
-        <!-- Handlebars templates -->
-        <script type="text/x-handlebars-template" id="layer-template">
-            <li class="layer" index="{{ index }}">
-            <input class="layer-checkbox" type="checkbox" class="visible-checkbox">
-            <span class="layer-name">{{name}}</span>
-            {{#if raster}}<span class="layer-type-marker raster">ⓡ</span>
-            {{else}}<span class="layer-type-marker vector">ⓥ</span>
-            {{/if}}
-            </li>
-        </script>
-
-        <!-- Libraries: JQuery, Handlebars -->
+        <!-- Libraries: JQuery, Handlebars, Promise -->
         <script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/lib/handlebars-v3.0.3.js"></script>
+        <script type="text/javascript" src="js/lib/es6-promise.min.js"></script>
+
+        <!-- Handlebars templates -->
+        <script type="text/javascript" src="templates/compiled.js"></script>
 
         <!-- Data files -->
         <script type="text/javascript" src="js/data/layerDataFile.js"></script>

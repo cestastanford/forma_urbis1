@@ -9,12 +9,6 @@
 var LayerListView = function(layers) {
 
     /*
-    *   Handlebars compile functions for the list elements.
-    */
-    var layerTemplate = $('#layer-template')[0];
-    var renderLayer = Handlebars.compile(layerTemplate.innerHTML);
-
-    /*
     *   Instance variable for the list elements.
     */
     this.$list = $('#layer-list .list');
@@ -24,7 +18,7 @@ var LayerListView = function(layers) {
     *   with a checkbox for each.
     */
     for (var i = 0; i < layers.raster.length; i++) {
-        var $rasterElement = $(renderLayer({
+        var $rasterElement = $(Handlebars.templates.layer({
             name: layers.raster[i].name,
             index: i,
             raster: true
@@ -32,7 +26,7 @@ var LayerListView = function(layers) {
         this.$list.append($rasterElement);
     }
     for (var i = 0; i < layers.vector.length; i++) {
-        var $vectorElement = $(renderLayer({
+        var $vectorElement = $(Handlebars.templates.layer({
             name: layers.vector[i].name,
             index: i,
             raster: false

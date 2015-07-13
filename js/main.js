@@ -50,7 +50,7 @@
             /*
             *   Creates the filter list view, which populates the filter
             *   list with the filters found in the filter model; contains
-            *   references to the interactive elements in the list.
+            *   references to the interactive elements in the filter list.
             */
             var filterList = new FilterListView(filters);
 
