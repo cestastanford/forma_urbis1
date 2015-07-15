@@ -41,20 +41,6 @@
         layers.init.call(layers, filters, function() {
 
             /*
-            *   Creates the layer list view, which populates the layer
-            *   list with the layers found in the layer model; contains
-            *   references to the interactive elements in the list.
-            */
-            var layerList = new LayerListView(layers);
-
-            /*
-            *   Creates the filter list view, which populates the filter
-            *   list with the filters found in the filter model; contains
-            *   references to the interactive elements in the filter list.
-            */
-            var filterList = new FilterListView(filters);
-
-            /*
             *   Creates the map view, which creates and updates the Leaflet
             *   map.
             */
@@ -66,7 +52,21 @@
             *   indicated filters to the indicated layers, then sends raster
             *   and vector data to the map view to update with.
             */
-    //        var controller = new MapController(layers, filters, layerList, filterList, map);
+            var controller = new MapController(layers, filters, map);
+
+            /*
+            *   Creates the layer list view, which populates the layer
+            *   list with the layers found in the layer model; sends
+            *   interaction events to the controller.
+            */
+            var layerList = new LayerListView(layers, controller);
+
+            /*
+            *   Creates the filter list view, which populates the filter
+            *   list with the filters found in the filter model; sends
+            *   interaction events to the controller.
+            */
+            var filterList = new FilterListView(filters, controller);
 
             /*
             *   Displays an initial map from the initial map settings.

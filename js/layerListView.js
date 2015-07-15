@@ -6,7 +6,7 @@
 *
 */
 
-var LayerListView = function(layers) {
+var LayerListView = function(layers, controller) {
 
     /*
     *   Instance variable for the list elements.
@@ -33,5 +33,18 @@ var LayerListView = function(layers) {
         }));
         this.$list.append($vectorElement);
     }
+
+    /*
+    *   Attaches listeners to the list elements, setting each to
+    *   send an event to the mapController on change.
+    */
+    var $layerCheckboxes = this.$list.find('.layer-checkbox');
+    $layerCheckboxes.change(function(event) {
+        var layerIndex = +event.target.parentElement.attributes.index.value;
+        var isRasterLayer = event.target.parentElement.classList.contains('raster-layer');
+        var layer = isRasterLayer ? layers.raster[layerIndex] : layers.vector[layerIndex];
+        var isChecked = event.target.checked;
+        controller.layerListUpdated(layer, isChecked);
+    });
 
 }

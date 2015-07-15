@@ -27,22 +27,17 @@ var layerDataFileObject = {
         //  Nolli Map
         {
             name: "Nolli Map",
+            type: 'raster',
             wmsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
+                url: "http://localhost:8080/geoserver/wms",
                 parameterObject: {
                     layers: "fur:nolli_map_raster",
                     format: "img/png",
-                    attribution: "",
+                    attribution: "Nolli Map",
                     transparent: true
                 }
             }
         },
-        {
-            name: "Another sample map!",
-            wmsParameters: {
-                none: 'none'
-            }
-        }
     ],
 
     vector: [
@@ -77,6 +72,7 @@ var layerDataFileObject = {
         //  Nolli Points Golden (reprojected)
         {
             name: 'Nolli Points Golden',
+            type: 'vector',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {

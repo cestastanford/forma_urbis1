@@ -12,8 +12,8 @@ var MapView = function() {
     *   Initial map center and map zoom.
     */
     var INITIAL = {
-        center: [41.899071, 12.488394],
-        zoom: 10
+        center: [41.899152, 12.476776],
+        zoom: 16
     }
 
     /*
@@ -38,10 +38,12 @@ var MapView = function() {
     */
     this.addRasterLayer = function(rasterLayerToAdd) {
 
-        var newRasterLayer = L.tileLayer.wms(rasterLayer.wmsParameters);
+        var newRasterLayer = L.tileLayer.wms(
+            rasterLayerToAdd.wmsParameters.url,
+            rasterLayerToAdd.wmsParameters.parameterObject);
         this.mapElement.addLayer(newRasterLayer);
         this.rasterLayersOnMap.push({
-            parameters: rasterLayer.wmsParameters,
+            parameters: rasterLayerToAdd.wmsParameters,
             leafletLayer: newRasterLayer
         });
 
@@ -52,10 +54,12 @@ var MapView = function() {
     */
     this.removeRasterLayer = function(rasterLayerToRemove) {
 
-        var rasterLayerToRemove = this.rasterLayersOnMap.filter(function(rasterLayerOnMap) {
+        var rasterLayerOnMap = this.rasterLayersOnMap.filter(function(rasterLayerOnMap) {
             return rasterLayerToRemove.wmsParameters === rasterLayerOnMap.parameters;
         })[0];
-        this.mapElement.removeLayer(rasterLayerToRemove.leafletLayer);
+        this.mapElement.removeLayer(rasterLayerOnMap.leafletLayer);
+        var index = this.rasterLayersOnMap.indexOf(rasterLayerOnMap);
+        this.rasterLayersOnMap.splice(index, 1);
 
     }
 
@@ -70,5 +74,10 @@ var MapView = function() {
         this.mapElement.addLayer(this.vectorLayerOnMap);
 
     };
+
+    // For debugging
+    this.mapElement.on('click', function(e) {
+        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+    });
 
 };
