@@ -32,7 +32,7 @@ var layerDataFileObject = {
                 url: "http://localhost:8080/geoserver/wms",
                 parameterObject: {
                     layers: "fur:nolli_map_raster",
-                    format: "img/png",
+                    format: "image/png",
                     attribution: "Nolli Map",
                     transparent: true
                 }
