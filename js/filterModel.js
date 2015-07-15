@@ -37,7 +37,7 @@ var FilterModel = function(layers, filterData) {
             vectorLayer.fields.forEach((function(field) {
 
                 var filterType = this.filterData.types[field.type];
-                filterType.applicable.push(field);
+                filterType.applicable.push({vectorLayer: vectorLayer, field: field});
                 this.activeFilterTypes[field.type] = filterType;
 
             }).bind(this));

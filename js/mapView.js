@@ -75,9 +75,4 @@ var MapView = function() {
 
     };
 
-    // For debugging
-    this.mapElement.on('click', function(e) {
-        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-    });
-
 };
