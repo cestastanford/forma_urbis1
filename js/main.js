@@ -58,7 +58,7 @@
             *   Creates the map view, which creates and updates the Leaflet
             *   map.
             */
-    //        var map = new MapView();
+            var map = new MapView();
 
             /*
             *   Creates the map controller, which receives interaction events
