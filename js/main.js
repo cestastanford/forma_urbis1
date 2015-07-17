@@ -19,11 +19,8 @@
         var filterData = filterDataFileObject;
 
         /*
-        *   Creates the layer model, providing access to the vector
-        *   layers (which have been downloaded to the client browser
-        *   on constructor return) and the dynamically-served raster
-        *   tile layers.  layersData is the global reference to the
-        *   Layers object from layerData.js.
+        *   Creates the layer model, which provides access to the
+        *   vector and raster layer data.
         */
         var layers = new LayerModel(layerData);
 
@@ -32,27 +29,34 @@
         *   filters that are found to be applicable to the layers
         *   provided from the layer model.
         */
-        var filters = new FilterModel(layers, filterData);
+        var filterEngine = new FilterEngine(layers, filterData);
 
         /*
-        *   Starts the asynchronous loading of modules dependent
-        *   on the layers and filters having loaded.
+        *   Creates the map view, which creates and updates the Leaflet
+        *   map.
         */
-        layers.init.call(layers, filters, function() {
+        var map = new MapView();
 
-            /*
-            *   Creates the map view, which creates and updates the Leaflet
-            *   map.
-            */
-            var map = new MapView();
+        /*
+        *   Creates the map controller, which receives interaction events
+        *   from the layer list and filter lists views, applies the
+        *   indicated filters to the indicated layers, then sends raster
+        *   and vector data to the map view to update with.
+        */
+        var controller = new MapController(layers, filterEngine, map);
 
-            /*
-            *   Creates the map controller, which receives interaction events
-            *   from the layer list and filter lists views, applies the
-            *   indicated filters to the indicated layers, then sends raster
-            *   and vector data to the map view to update with.
-            */
-            var controller = new MapController(layers, filters, map);
+        /*
+        *   Creates the filter list view, which populates the filter
+        *   list with the filters found in the filter model; sends
+        *   interaction events to the controller.
+        */
+        var filterList = new FilterListView(filterEngine, controller);
+
+        /*
+        *   Starts the asynchronous downloading of the WFS layers,
+        *   loading the rest of the site upon completion.
+        */
+        layers.downloadVectorFeatures.call(layers, function() {
 
             /*
             *   Creates the layer list view, which populates the layer
@@ -62,16 +66,9 @@
             var layerList = new LayerListView(layers, controller);
 
             /*
-            *   Creates the filter list view, which populates the filter
-            *   list with the filters found in the filter model; sends
-            *   interaction events to the controller.
-            */
-            var filterList = new FilterListView(filters, controller);
-
-            /*
             *   Displays an initial map from the initial map settings.
             */
-    //        controller.displayInitialMap();
+//            controller.displayInitialMap();
 
         });
 

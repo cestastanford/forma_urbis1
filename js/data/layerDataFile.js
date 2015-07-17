@@ -121,7 +121,7 @@ var layerDataFileObject = {
                     description: 'An annotation for the feature.'
                 },
                 {
-                    name: 'Architect',
+                    name: 'ARCHITECT',
                     type: 'text',
                     subtype: 'person',
                     displayName: 'Architect',

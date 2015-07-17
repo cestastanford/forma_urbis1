@@ -68,9 +68,8 @@ var MapView = function() {
     *   GeoJSON FeatureCollection provided.
     */
     this.updateVectorFeatures = function(geoJsonVectorData) {
-
-        this.mapElement.removeLayer(this.vectorLayerOnMap);
-        this.vectorLayerOnMap = L.geoJSON(geoJsonVectorData);
+        if (this.vectorLayerOnMap) this.mapElement.removeLayer(this.vectorLayerOnMap);
+        this.vectorLayerOnMap = L.geoJson(geoJsonVectorData);
         this.mapElement.addLayer(this.vectorLayerOnMap);
 
     };

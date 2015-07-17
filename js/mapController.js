@@ -6,13 +6,19 @@
 *
 */
 
-var MapController = function(layers, filters, map) {
+var MapController = function(layers, filterEngine, map) {
 
     /*
     *   A list of all vector layers whose features are included
     *   when filtering.
     */
     this.vectorFeatureSources = [];
+
+    /*
+    *   A list of the most recently submitted filters.
+    */
+    this.activeFilters = [];
+    this.inputValues = [];
 
     /*
     *   The dynamically-updated GeoJSON FeatureCollection
@@ -30,21 +36,17 @@ var MapController = function(layers, filters, map) {
     }
 
     /*
-    *   The list of filters currently applied to vector features.
-    */
-    this.appliedFilters = [];
-
-    /*
     *   Filters a feature set through the applied filters.
     */
-    this.filterFeatures = function(source) {
-        var fields = source.fields;
+    this.filterFeatures = function(source, activeFilters, inputValues) {
+        var fieldMap = source.fields;
         var features = source.geoJSON.features;
-        return features.filter(function(feature) {
-            for (var i = 0; i < this.appliedFilters; i++) {
-                return this.appliedFilters[i](fields, feature)
+        return features.filter((function(feature) {
+            if (this.activeFilters.length === 0) return true;
+            for (var i = 0; i < this.activeFilters.length; i++) {
+                return filterEngine.filterFeature(feature, fieldMap, activeFilters[i], inputValues[i]);
             }
-        })
+        }).bind(this));
     };
 
     /*
@@ -53,20 +55,27 @@ var MapController = function(layers, filters, map) {
     *   filters and sends the results, combined into one
     *   FeatureCollection, to the mapView to display.
     */
-    this.refreshVectorFeatures = function() {
+    this.refreshVectorFeatures = function(activeFilters, inputValues) {
         //  clear the array
         this.vectorFeatures.features = [];
         this.vectorFeatures.totalFeatures = 0;
 
+        //  update the last-used filters if provided (not provided
+        //  on layer change).
+        if (activeFilters) {
+            this.activeFilters = activeFilters;
+            this.inputValues = inputValues;
+        }
+
         //  add all sources to the array
-        this.vectorFeatureSources.forEach(function(source) {
-            var filteredFeatures = this.filterFeatures(source);
-            this.vectorFeatures.features.push(source.geoJSON.features);
+        this.vectorFeatureSources.forEach((function(source) {
+            var filteredFeatures = this.filterFeatures(source, activeFilters, inputValues);
+            this.vectorFeatures.features = this.vectorFeatures.features.concat(filteredFeatures);
             this.vectorFeatures.totalFeatures += filteredFeatures.length;
-        });
+        }).bind(this));
 
         //  send updated array to map
-        map.updateVectorFeatures(vectorFeatureSources);
+        map.updateVectorFeatures(this.vectorFeatures);
     };
 
     /*
@@ -87,7 +96,7 @@ var MapController = function(layers, filters, map) {
                 var index = this.vectorFeatureSources.indexOf(layer);
                 this.vectorFeatureSources.splice(index, 1);
             }
-            refreshVectorFeatures();
+            this.refreshVectorFeatures();
         }
     };
 

@@ -21,17 +21,22 @@ var LayerModel = function(layerData) {
     this.layerData = layerData;
 
     /*
+    *   Creates a reference to the list of raster tile layers, with
+    *   metadata and WMS access parameters for each.  This data
+    *   should be already correctly-formatted from the data file.
+    */
+    this.raster = this.layerData.raster;
+
+    /*
+    *   Creates the soon-to-be-populated list of vector layers.
+    */
+    this.vector = [];
+
+    /*
     *   Definition of the init method to begin layer prepration;
     *   calls the passed callback to begin filter preparation.
     */
-    this.init = (function(filters, callback) {
-
-        /*
-        *   Creates a reference to the list of raster tile layers, with
-        *   metadata and WMS access parameters for each.  This data
-        *   should be already correctly-formatted from the data file.
-        */
-        this.raster = this.layerData.raster;
+    this.downloadVectorFeatures = (function(callback) {
 
         /*
         *   Downloads the vector layers via WFS using the parameters in
@@ -39,7 +44,6 @@ var LayerModel = function(layerData) {
         *   the layer data from the data file and the downloaded GeoJSON
         *   FeatureCollection.
         */
-        this.vector = [];
         this.layerData.vector.forEach((function(vectorLayer) {
             $.ajax($.extend({}, vectorLayer.wfsParameters, {
                 type: 'GET',
@@ -49,8 +53,10 @@ var LayerModel = function(layerData) {
                     vectorLayer.geoJSON = jsonObject;
                     this.vector.push(vectorLayer);
 
-                    //  Load filters after layers have been prepared.
-                    filters.init.call(filters, callback);
+                    //  Load elements that depend on layers after layers
+                    //  have been loaded.
+                    //  WARNING: only works because we only have one layer.
+                    callback();
 
                 }).bind(this)
             }));

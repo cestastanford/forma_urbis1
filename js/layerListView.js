@@ -9,7 +9,7 @@
 var LayerListView = function(layers, controller) {
 
     /*
-    *   Instance variable for the list elements.
+    *   Instance variable for the list element.
     */
     this.$list = $('#layer-list .list');
 
