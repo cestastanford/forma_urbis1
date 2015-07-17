@@ -69,7 +69,7 @@ var MapController = function(layers, filterEngine, map) {
 
         //  add all sources to the array
         this.vectorFeatureSources.forEach((function(source) {
-            var filteredFeatures = this.filterFeatures(source, activeFilters, inputValues);
+            var filteredFeatures = this.filterFeatures(source, this.activeFilters, this.inputValues);
             this.vectorFeatures.features = this.vectorFeatures.features.concat(filteredFeatures);
             this.vectorFeatures.totalFeatures += filteredFeatures.length;
         }).bind(this));
