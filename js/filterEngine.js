@@ -26,7 +26,7 @@ var FilterEngine = function(layers, filterData) {
         *   applies to.
         */
         var applicableFields = fieldMap.filter(function(field) {
-            return (field.type === filter.type);
+            return (filter.type.indexOf(field.type) > -1);
         });
 
         /*
