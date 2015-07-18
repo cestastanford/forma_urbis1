@@ -15,17 +15,17 @@
 */
 var LayerModel = function(layerData) {
 
-    /*
-    *   Saved reference to the layer data store.
-    */
-    this.layerData = layerData;
+
+    // *   Saved reference to the layer data store.
+
+    // layerData = layerData;
 
     /*
     *   Creates a reference to the list of raster tile layers, with
     *   metadata and WMS access parameters for each.  This data
     *   should be already correctly-formatted from the data file.
     */
-    this.raster = this.layerData.raster;
+    this.raster = layerData.raster;
 
     /*
     *   Creates the soon-to-be-populated list of vector layers.
@@ -36,7 +36,7 @@ var LayerModel = function(layerData) {
     *   Definition of the init method to begin layer prepration;
     *   calls the passed callback to begin filter preparation.
     */
-    this.downloadVectorFeatures = (function(callback) {
+    this.downloadVectorFeatures = function(callback) {
 
         /*
         *   Downloads the vector layers via WFS using the parameters in
@@ -44,49 +44,35 @@ var LayerModel = function(layerData) {
         *   the layer data from the data file and the downloaded GeoJSON
         *   FeatureCollection.
         */
-        this.layerData.vector.forEach((function(vectorLayer) {
-            $.ajax($.extend({}, vectorLayer.wfsParameters, {
-                type: 'GET',
-                dataType: 'jsonp',
-                jsonpCallback: 'getJson',
-                success: (function(jsonObject) {
-                    vectorLayer.geoJSON = jsonObject;
-                    this.vector.push(vectorLayer);
+        var layersToLoad = layerData.vector.length;
+        var layerLoads = [];
+        window.JSONP_responses = [];
+        for (var i = 0; i < layersToLoad; i++) {
+            var layer = layerData.vector[i];
+            var layerLoad = new Promise(function(resolve) {
+                var jsonpRequest = document.createElement('script');
+                jsonpRequest.type = 'text/javascript';
+                var queryString = Object.keys(layer.wfsParameters.data).reduce(function(a,k){a.push(k+'='+encodeURIComponent(layer.wfsParameters.data[k]));return a},[]).join('&');
+                jsonpRequest.src = layer.wfsParameters.url + '?' + queryString + '[' + i + ']';
+                window.JSONP_responses[i] = resolve;
+                $('body').append(jsonpRequest);
+            });
 
-                    //  Load elements that depend on layers after layers
-                    //  have been loaded.
-                    //  WARNING: only works because we only have one layer.
-                    callback();
+            //  on return, add each layer to the array.
+            layerLoad.then((function(layer, response) {
+                layer.geoJSON = response;
+            }).bind(undefined, layer));
 
-                }).bind(this)
-            }));
+            layerLoads.push(layerLoad);
+        }
+
+        Promise.all(layerLoads).then((function() {
+            this.vector = layerData.vector;
+            callback();
+            console.log(this.vector);
+
         }).bind(this));
 
-    }).bind(this);
-
-
-	// /*
- //    *   Object method to retrieve an array of the raster layers
-	// *	matching the supplied array of indices.
-	// */
-	// this.getRasterLayers = function(indices) {
-	// 	var layersToReturn = [];
-	// 	indices.forEach(function(index) {
-	// 		layersToReturn.push(this.raster[index]);
-	// 	});
-	// 	return layersToReturn;
-	// };
-
-	// /*
- //    *   Object method to retrieve an array of the vector layers
-	// *	matching the supplied array of indices.
-	// */
-	// this.getVectorLayers = function(indices) {
-	// 	var layersToReturn = [];
-	// 	indices.forEach(function(index) {
-	// 		layersToReturn.push(this.vector[index]);
-	// 	});
-	// 	return layersToReturn;
-	// };
+    };
 
 };

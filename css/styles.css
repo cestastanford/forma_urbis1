@@ -78,3 +78,13 @@ hr {
     top: .1rem;
     right: .5rem;
 }
+
+input {
+    border: default;
+    color: #000000;
+}
+
+button {
+    border: default;
+    color: #000000;
+}

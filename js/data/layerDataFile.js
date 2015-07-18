@@ -31,7 +31,7 @@ var layerDataFileObject = {
             wmsParameters: {
                 url: "http://localhost:8080/geoserver/wms",
                 parameterObject: {
-                    layers: "fur:nolli_map_raster",
+                    layers: "fur:nolli_map",
                     format: "image/png",
                     attribution: "Nolli Map",
                     transparent: true
@@ -71,17 +71,16 @@ var layerDataFileObject = {
 
         //  Nolli Points Golden (reprojected)
         {
-            name: 'Nolli Points Golden',
-            type: 'vector',
+            name: 'Nolli Points',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {
                     service: 'WFS',
                     version: '1.0.0',
                     request: 'GetFeature',
-                    typeName: 'fur:nolli_points_reprojected',
+                    typeName: 'fur:nolli_points',
                     outputFormat: 'text/javascript',
-                    format_options: 'callback:getJson'
+                    format_options: 'callback:JSONP_responses'
                 }
             },
             fields: [
@@ -191,6 +190,81 @@ var layerDataFileObject = {
                 //     description: 'The type of feature.'
                 // }
             ]
+        },
+        {
+            name: 'Domes',
+            wfsParameters: {
+                url: "http://localhost:8080/geoserver/ows",
+                data: {
+                    service: 'WFS',
+                    version: '1.0.0',
+                    request: 'GetFeature',
+                    typeName: 'fur:domes',
+                    outputFormat: 'text/javascript',
+                    format_options: 'callback:JSONP_responses'
+                }
+            },
+            fields: []
+        },
+        {
+            name: 'Excavations',
+            wfsParameters: {
+                url: "http://localhost:8080/geoserver/ows",
+                data: {
+                    service: 'WFS',
+                    version: '1.0.0',
+                    request: 'GetFeature',
+                    typeName: 'fur:excavations',
+                    outputFormat: 'text/javascript',
+                    format_options: 'callback:JSONP_responses'
+                }
+            },
+            fields: []
+        },
+        {
+            name: 'Lanciani Streets',
+            wfsParameters: {
+                url: "http://localhost:8080/geoserver/ows",
+                data: {
+                    service: 'WFS',
+                    version: '1.0.0',
+                    request: 'GetFeature',
+                    typeName: 'fur:lanciani_streets',
+                    outputFormat: 'text/javascript',
+                    format_options: 'callback:JSONP_responses'
+                }
+            },
+            fields: []
+        },
+        {
+            name: 'Landscape Elements',
+            wfsParameters: {
+                url: "http://localhost:8080/geoserver/ows",
+                data: {
+                    service: 'WFS',
+                    version: '1.0.0',
+                    request: 'GetFeature',
+                    typeName: 'fur:landscape_elements',
+                    outputFormat: 'text/javascript',
+                    format_options: 'callback:JSONP_responses'
+                }
+            },
+            fields: []
+        },
+        {
+            name: 'Tiber',
+            wfsParameters: {
+                url: "http://localhost:8080/geoserver/ows",
+                data: {
+                    service: 'WFS',
+                    version: '1.0.0',
+                    request: 'GetFeature',
+                    typeName: 'fur:tiber',
+                    outputFormat: 'text/javascript',
+                    format_options: 'callback:JSONP_responses'
+                }
+            },
+            fields: []
         }
     ]
 };
