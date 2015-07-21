@@ -56,7 +56,7 @@
         *   list with the filters found in the filter model; sends
         *   interaction events to the controller.
         */
-        var filterList = new FilterListView(filterEngine, controller);
+        var filterList = new FilterListView(filterData.filters, controller);
 
         /*
         *   Starts the asynchronous downloading of the WFS layers,

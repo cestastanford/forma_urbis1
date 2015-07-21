@@ -9,13 +9,6 @@
 var FilterEngine = function(layers, filterData) {
 
     /*
-    *   Saved references to the layers model and the filter data
-    *   store.
-    */
-    this.layers = layers;
-    this.filters = filterData;
-
-    /*
     *   Given a certain feature, returns whether that feature matches
     *   the requirements to pass a certain filter.
     */
@@ -26,7 +19,7 @@ var FilterEngine = function(layers, filterData) {
         *   applies to.
         */
         var applicableFields = fieldMap.filter(function(field) {
-            if (filter.type.indexOf(field.type) > -1) {
+            if (filter.type === field.type) {
                 if (subtypes.indexOf(field.subtype) > -1) {
                     return true;
                 }
@@ -35,10 +28,27 @@ var FilterEngine = function(layers, filterData) {
         });
 
         /*
-        *   Get the list of fields that the filter satisfies.
+        *   Convert the input to the default format.
+        */
+        var inputDefault = filterData.conversion[filter.type].inputDefault;
+        var convertedInput = filterData.conversion[filter.type][inputDefault](input);
+
+        /*
+        *   Get the list of fields that satisfy the filter.
         */
         var satisfiedFields = applicableFields.filter(function(field) {
-            return filter.run(feature.properties[field.name], input, subtypes);
+            var convertedValue = feature.properties[field.name];
+            if (convertedValue !== null &&
+                convertedValue !== undefined &&
+                convertedValue !== '' &&
+                convertedValue !== 0) {
+                if (field.format !== 'default') {
+                    console.log('converting ', filter.type, ' of format ', field.format, ' with value ', convertedValue, ' to default format with value ', filterData.conversion[filter.type][field.format](convertedValue));
+                    convertedValue = filterData.conversion[filter.type][field.format](convertedValue);
+                }
+                if (convertedValue !== undefined) return filter.run(convertedValue, convertedInput);
+            }
+            return false;
         });
 
         /*

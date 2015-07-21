@@ -6,34 +6,96 @@
 *
 */
 
-var filterDataFileObject = [
-    {
-        name: 'text-attribute',
-        type: 'text',
-        mode: 'any',
-        subtypes: [
-            {
-                name: 'name',
-                displayName: 'Feature name'
-            },
-            {
-                name: 'person',
-                displayName: 'Related person',
-            },
-            {
-                name: 'note',
-                displayName: 'Note',
-            },
-            {
-                name: '',
-                displayName: 'Other'
+var filterDataFileObject = {
+    filters: [
+        {
+            name: 'text-attribute',
+            type: 'text',
+            mode: 'any',
+            subtypes: [
+                {
+                    name: 'name',
+                    displayName: 'Feature name'
+                },
+                {
+                    name: 'person',
+                    displayName: 'Related person',
+                },
+                {
+                    name: 'note',
+                    displayName: 'Note',
+                },
+                {
+                    name: '',
+                    displayName: 'Other'
+                }
+            ],
+            run: function(data, input) {
+                return (data.indexOf(input) > -1);
             }
-        ],
-        run: function(data, input) {
-            return (data.indexOf(input) > -1);
+        },
+        {
+            name: 'matching-date',
+            type: 'date',
+            mode: 'any',
+            subtypes: [
+                {
+                    name: 'start',
+                    displayName: 'Excavation start'
+                },
+                {
+                    name: 'end',
+                    displayName: 'Excavation end',
+                },
+                {
+                    name: 'period',
+                    displayName: 'Period',
+                },
+            ],
+            run: function(data, input) {
+                console.log(data, input);
+                var inputIsAfterData = input[0] > data[1];
+                var inputIsBeforeData = input[1] < data[0];
+                if (inputIsBeforeData || inputIsAfterData) return false;
+                return true;
+            }
+        },
+    ],
+    conversion: {
+
+        text: {
+
+            inputDefault: 'mixed-case',
+            'mixed-case': function(input) {
+                return input.toLowerCase();
+            }
+
+        },
+        date: {
+
+            inputDefault: 'year',
+            'year': function(input) {
+                return [+input, +input];
+            },
+            'text-period': function(input) {
+                var periods = {
+                    'Kingdom': [-1000, -508],
+                    'Republic': [-509, -26],
+                    'Empire': [-27, 323],
+                    'Early Medieval': [324, 599],
+                    'Medieval': [600, 1419],
+                    'Early Modern': [1420, 1797],
+                    'Modern': [1798, 2015],
+                };
+                if (periods[input]) return periods[input];
+            },
+
         }
+
+
+
     }
-];
+};
 
 
 // {

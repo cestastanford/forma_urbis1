@@ -21,7 +21,10 @@ var FeatureDetailView = function(layers) {
         this.$featureDetailElement.html('');
         var fields = [];
         for (var i = 0; i < feature.layer.fields.length; i++) {
-            if (feature.properties[feature.layer.fields[i].name].length > 0) {
+            if (feature.properties[feature.layer.fields[i].name] !== null &&
+                feature.properties[feature.layer.fields[i].name] !== undefined &&
+                feature.properties[feature.layer.fields[i].name] !== '' &&
+                feature.properties[feature.layer.fields[i].name] !== 0) {
                 var field = {
                     displayName: feature.layer.fields[i].displayName,
                     description: feature.layer.fields[i].description,

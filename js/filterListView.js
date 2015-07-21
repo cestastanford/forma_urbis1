@@ -6,7 +6,7 @@
 *
 */
 
-var FilterListView = function(filterEngine, controller) {
+var FilterListView = function(filters, controller) {
 
     /*
     *   Instance variable for the list element.
@@ -21,10 +21,10 @@ var FilterListView = function(filterEngine, controller) {
     /*
     *   Adds each compiled filter template to the DOM.
     */
-    for (var i = 0; i < filterEngine.filters.length; i++) {
-        var filterElement = Handlebars.templates[filterEngine.filters[i].name]({
+    for (var i = 0; i < filters.length; i++) {
+        var filterElement = Handlebars.templates[filters[i].name]({
             index: i,
-            subtypes: filterEngine.filters[i].subtypes
+            subtypes: filters[i].subtypes
         });
         this.$list.append(filterElement);
     }
@@ -44,11 +44,10 @@ var FilterListView = function(filterEngine, controller) {
             if (value) {
                 //  send that the filter is active
                 var filterIndex = $(element).attr('index');
-                activeFilters.push(filterEngine.filters[filterIndex]);
+                activeFilters.push(filters[filterIndex]);
                 //  send the subtypes the filter is applying to
                 var subtypes = [];
                 $(element.parentElement).find('.subtype').each(function(index, element) {
-                    console.log(element);
                     if (element.checked) subtypes.push($(element).attr('subtype'));
                 });
                 activeFilterInputs.push({
@@ -57,7 +56,6 @@ var FilterListView = function(filterEngine, controller) {
                 });
             }
         });
-        console.log(activeFilters, activeFilterInputs);
         controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
     }).bind(this));
 

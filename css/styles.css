@@ -25,7 +25,7 @@ hr {
 
 #map-and-layer-list {
     width: 100vp;
-    height: 25rem;
+    height: 35rem;
     margin: 1rem;
     position: relative;
 }
@@ -116,4 +116,8 @@ button {
 .filter div {
     float: left;
     margin-left: 1rem;
+}
+
+.filter h4 {
+    margin-bottom: .5rem;
 }
