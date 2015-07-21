@@ -69,7 +69,6 @@ var LayerModel = function(layerData) {
         Promise.all(layerLoads).then((function() {
             this.vector = layerData.vector;
             callback();
-            console.log(this.vector);
 
         }).bind(this));
 

@@ -7,17 +7,34 @@
 */
 
 var filterDataFileObject = [
-
     {
-        name: 'any-text-match',
+        name: 'text-attribute',
         type: 'text',
         mode: 'any',
+        subtypes: [
+            {
+                name: 'name',
+                displayName: 'Feature name'
+            },
+            {
+                name: 'person',
+                displayName: 'Related person',
+            },
+            {
+                name: 'note',
+                displayName: 'Note',
+            },
+            {
+                name: '',
+                displayName: 'Other'
+            }
+        ],
         run: function(data, input) {
             return (data.indexOf(input) > -1);
         }
     }
-
 ];
+
 
 // {
 

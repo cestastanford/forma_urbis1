@@ -38,13 +38,14 @@ var MapController = function(layers, filterEngine, map) {
     /*
     *   Filters a feature set through the applied filters.
     */
-    this.filterFeatures = function(source, activeFilters, inputValues) {
+    this.filterFeatures = function(source, activeFilters, activeFilterInputs) {
         var fieldMap = source.fields;
         var features = source.geoJSON.features;
         return features.filter((function(feature) {
+            feature.layer = source;
             if (this.activeFilters.length === 0) return true;
             for (var i = 0; i < this.activeFilters.length; i++) {
-                return filterEngine.filterFeature(feature, fieldMap, activeFilters[i], inputValues[i]);
+                return filterEngine.filterFeature(feature, fieldMap, activeFilters[i], activeFilterInputs[i].value, activeFilterInputs[i].subtypes);
             }
         }).bind(this));
     };
@@ -55,7 +56,7 @@ var MapController = function(layers, filterEngine, map) {
     *   filters and sends the results, combined into one
     *   FeatureCollection, to the mapView to display.
     */
-    this.refreshVectorFeatures = function(activeFilters, inputValues) {
+    this.refreshVectorFeatures = function(activeFilters, activeFilterInputs) {
         //  clear the array
         this.vectorFeatures.features = [];
         this.vectorFeatures.totalFeatures = 0;
@@ -64,12 +65,12 @@ var MapController = function(layers, filterEngine, map) {
         //  on layer change).
         if (activeFilters) {
             this.activeFilters = activeFilters;
-            this.inputValues = inputValues;
+            this.activeFilterInputs = activeFilterInputs;
         }
 
         //  add all sources to the array
         this.vectorFeatureSources.forEach((function(source) {
-            var filteredFeatures = this.filterFeatures(source, this.activeFilters, this.inputValues);
+            var filteredFeatures = this.filterFeatures(source, this.activeFilters, this.activeFilterInputs);
             this.vectorFeatures.features = this.vectorFeatures.features.concat(filteredFeatures);
             this.vectorFeatures.totalFeatures += filteredFeatures.length;
         }).bind(this));

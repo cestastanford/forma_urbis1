@@ -32,10 +32,16 @@
         var filterEngine = new FilterEngine(layers, filterData);
 
         /*
+        *   Creates the feature detail view, which displays a vector
+        *   feature's attributes.
+        */
+        var featureDetails = new FeatureDetailView(layers);
+
+        /*
         *   Creates the map view, which creates and updates the Leaflet
         *   map.
         */
-        var map = new MapView();
+        var map = new MapView(featureDetails);
 
         /*
         *   Creates the map controller, which receives interaction events

@@ -6,7 +6,7 @@
 *
 */
 
-var MapView = function() {
+var MapView = function(featureDetails) {
 
     /*
     *   Initial map center and map zoom.
@@ -69,7 +69,13 @@ var MapView = function() {
     */
     this.updateVectorFeatures = function(geoJsonVectorData) {
         if (this.vectorLayerOnMap) this.mapElement.removeLayer(this.vectorLayerOnMap);
-        this.vectorLayerOnMap = L.geoJson(geoJsonVectorData);
+        this.vectorLayerOnMap = L.geoJson(geoJsonVectorData, {
+            onEachFeature: function(feature, layer) {
+                layer.on('click', function() {
+                    featureDetails.display(feature);
+                });
+            }
+        });
         this.mapElement.addLayer(this.vectorLayerOnMap);
 
     };

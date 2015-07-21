@@ -23,7 +23,8 @@ var FilterListView = function(filterEngine, controller) {
     */
     for (var i = 0; i < filterEngine.filters.length; i++) {
         var filterElement = Handlebars.templates[filterEngine.filters[i].name]({
-            index: i
+            index: i,
+            subtypes: filterEngine.filters[i].subtypes
         });
         this.$list.append(filterElement);
     }
@@ -34,18 +35,30 @@ var FilterListView = function(filterEngine, controller) {
     *   mapController.
     */
     this.$submit.click((function() {
-        var $inputElements = this.$list.find('input');
+        var $inputElements = this.$list.find('.input');
         var activeFilters = [];
-        var inputValues = [];
+        var activeFilterInputs = [];
         $inputElements.each(function(index, element) {
+            //  for each filter with a term in the input box
             var value = $(element).val();
             if (value) {
+                //  send that the filter is active
                 var filterIndex = $(element).attr('index');
                 activeFilters.push(filterEngine.filters[filterIndex]);
-                inputValues.push(value);
+                //  send the subtypes the filter is applying to
+                var subtypes = [];
+                $(element.parentElement).find('.subtype').each(function(index, element) {
+                    console.log(element);
+                    if (element.checked) subtypes.push($(element).attr('subtype'));
+                });
+                activeFilterInputs.push({
+                    value: value,
+                    subtypes: subtypes
+                });
             }
         });
-        controller.refreshVectorFeatures(activeFilters, inputValues);
+        console.log(activeFilters, activeFilterInputs);
+        controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
     }).bind(this));
 
 };

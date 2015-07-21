@@ -19,22 +19,26 @@ var FilterEngine = function(layers, filterData) {
     *   Given a certain feature, returns whether that feature matches
     *   the requirements to pass a certain filter.
     */
-    this.filterFeature = function(feature, fieldMap, filter, input) {
+    this.filterFeature = function(feature, fieldMap, filter, input, subtypes) {
 
         /*
         *   Get the list of fields in the fieldMap that the filter
         *   applies to.
         */
         var applicableFields = fieldMap.filter(function(field) {
-            return (filter.type.indexOf(field.type) > -1);
+            if (filter.type.indexOf(field.type) > -1) {
+                if (subtypes.indexOf(field.subtype) > -1) {
+                    return true;
+                }
+            }
+            return false;
         });
 
         /*
         *   Get the list of fields that the filter satisfies.
         */
         var satisfiedFields = applicableFields.filter(function(field) {
-            if (filter.run(feature.properties[field.name], input)) console.log('found!', feature.properties[field.name]);
-            return filter.run(feature.properties[field.name], input);
+            return filter.run(feature.properties[field.name], input, subtypes);
         });
 
         /*

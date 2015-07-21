@@ -36,6 +36,30 @@ hr {
     background-color: #ffffff;
 }
 
+#feature-details {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 15rem;
+    height: 18rem;
+    background-color: #cccccc;
+    padding: 1rem;
+}
+
+#feature-details .label {
+    margin: 0rem;
+}
+
+#feature-details .list {
+    overflow: scroll;
+    font-size: small;
+    height: 84%;
+}
+
+.field-name {
+    font-weight: bold;
+}
+
 #layer-list {
     position: absolute;
     top: 2rem;
@@ -79,12 +103,17 @@ hr {
     right: .5rem;
 }
 
-input {
+button {
     border: default;
     color: #000000;
 }
 
-button {
-    border: default;
+.filter [type="text"] {
     color: #000000;
+    float: left;
+}
+
+.filter div {
+    float: left;
+    margin-left: 1rem;
 }
