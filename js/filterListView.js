@@ -59,4 +59,8 @@ var FilterListView = function(filters, controller) {
         controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
     }).bind(this));
 
+    /*
+    *   Also binds any 'submit' action on the form to the submit button.
+    */
+
 };

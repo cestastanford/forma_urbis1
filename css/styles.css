@@ -1,5 +1,5 @@
 body {
-    background-color: #cccccc;
+    background-color: #aaa;
     color: #ffffff;
     font-family: 'Lato', sans-serif;
     padding: 1rem;
@@ -15,7 +15,7 @@ li {
 
 hr {
     height: 1px;
-    background-color: #ffffff;
+    background-color: #fff;
     border: none;
 }
 
@@ -33,7 +33,7 @@ hr {
 #map {
     height: 100%;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 #feature-details {
@@ -42,7 +42,7 @@ hr {
     right: 2rem;
     width: 15rem;
     height: 18rem;
-    background-color: #cccccc;
+    background-color: #bbb;
     padding: 1rem;
 }
 
@@ -66,7 +66,7 @@ hr {
     left: 2rem;
     width: 15rem;
     height: 18rem;
-    background-color: #cccccc;
+    background-color: #bbb;
     padding: 1rem;
 }
 
@@ -75,9 +75,9 @@ hr {
 }
 
 #filter-list {
-    background-color: #dddddd;
+    background-color: #bbb;
     width: 100vp;
-    height: 20rem;
+    height: auto;
     padding: 1rem;
     margin: 1rem;
 }
@@ -106,6 +106,7 @@ hr {
 button {
     border: default;
     color: #000000;
+    margin-top: 1rem;
 }
 
 .filter [type="text"] {
