@@ -1,3 +1,7 @@
+/*
+*   Body styles
+*/
+
 body {
     background-color: #aaa;
     color: #ffffff;
@@ -23,7 +27,7 @@ hr {
     margin: 1rem;
 }
 
-#map-and-layer-list {
+#map-and-feature-list {
     width: 100vp;
     height: 35rem;
     margin: 1rem;
@@ -31,12 +35,14 @@ hr {
 }
 
 #map {
+    border: 5px solid #fff;
     height: 100%;
     width: 100%;
     background-color: #fff;
 }
 
 #feature-details {
+    border: 5px solid #fff;
     position: absolute;
     top: 2rem;
     right: 2rem;
@@ -61,13 +67,12 @@ hr {
 }
 
 #layer-list {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    width: 15rem;
-    height: 18rem;
+    float: left;
     background-color: #bbb;
+    width: auto;
+    height: auto;
     padding: 1rem;
+    margin: 1rem;
 }
 
 #layer-list .label {
@@ -75,8 +80,9 @@ hr {
 }
 
 #filter-list {
+    float: left;
     background-color: #bbb;
-    width: 100vp;
+    width: auto;
     height: auto;
     padding: 1rem;
     margin: 1rem;
@@ -91,6 +97,10 @@ hr {
     margin-bottom: .5rem;
 }
 
+.layer-name {
+    margin-right: 2rem;
+}
+
 .layer-checkbox {
     position: relative;
     bottom: .1rem;
@@ -98,7 +108,8 @@ hr {
 }
 
 .layer-type-marker {
-    position: absolute;
+    float: right;
+    position: relative;
     top: .1rem;
     right: .5rem;
 }
@@ -121,4 +132,32 @@ button {
 
 .filter h4 {
     margin-bottom: .5rem;
+}
+
+#results-list {
+    background-color: #bbb;
+    float: right;
+    width: auto;
+    height: auto;
+    max-width: 350px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1rem solid #bbb;
+    margin: 1rem;
+    white-space: nowrap;
+}
+
+#results-list .label {
+    margin: 0rem;
+}
+
+.result {
+    cursor: pointer;
+    margin: 4px;
+}
+
+.result .layer {
+    font-weight: bold;
+    margin-right: .5em;
 }

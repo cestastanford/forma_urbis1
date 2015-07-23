@@ -44,12 +44,18 @@
         var map = new MapView(featureDetails);
 
         /*
+        *   Creates the results view, which shows the results from a
+        *   vector filter search.
+        */
+        var results = new ResultsListView(featureDetails);
+
+        /*
         *   Creates the map controller, which receives interaction events
         *   from the layer list and filter lists views, applies the
         *   indicated filters to the indicated layers, then sends raster
         *   and vector data to the map view to update with.
         */
-        var controller = new MapController(layers, filterEngine, map);
+        var controller = new MapController(layers, filterEngine, map, results);
 
         /*
         *   Creates the filter list view, which populates the filter

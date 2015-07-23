@@ -29,23 +29,11 @@
             <h1 id="page-title">Forma Urbis Romae</h1>
         </header>
 
-        <!-- Div containing the map and the layer selection list -->
-        <div id="map-and-layer-list">
+        <!-- Div containing the map and the feature detail box -->
+        <div id="map-and-feature-list">
 
             <!-- Element for Leaflet map insertion -->
             <div id="map"></div>
-
-            <!-- Interactive list for selecting which layers to display;
-                 floats on top of map. -->
-            <div id="layer-list">
-
-                <h3 class="label">Layers</h3>
-                <hr>
-
-                <!-- Dynamically generated -->
-                <ul class="list"></ul>
-
-            </div>
 
             <!-- Div displaying the information for a certain selected vector
                  featire. -->
@@ -61,19 +49,44 @@
 
         </div>
 
-        <!-- Div containing the layer filter options; this element is
-             dynamically generated. -->
-        <form id="filter-list" action="javascript:void(0);">
+        <!-- Interactive list for selecting which layers to display;
+             floats on top of map. -->
+        <div id="layer-list">
 
-            <h3 class="label">Filters</h3>
+            <h3 class="label">Layers</h3>
             <hr>
 
             <!-- Dynamically generated -->
             <ul class="list"></ul>
 
-            <button type="submit" class="submit">Filter Results</button>
+        </div>
 
-        </form>
+        <!-- Div containing the layer filter options; this element is
+             dynamically generated. -->
+         <div id="filter-list">
+            <form action="javascript:void(0);">
+
+                <h3 class="label">Filters</h3>
+                <hr>
+
+                <!-- Dynamically generated -->
+                <ul class="list"></ul>
+
+                <button type="submit" class="submit">Filter Results</button>
+
+            </form>
+        </div>
+
+        <!-- Div containing the results from the filter search. -->
+        <div id="results-list">
+
+            <h3 class="label">Features</h3>
+            <hr>
+
+            <!-- Dynamicall generated -->
+            <ul class="list"></ul>
+
+        </div>
 
         <div id="scripts">
 
@@ -97,8 +110,15 @@
             <script type="text/javascript" src="js/layerListView.js"></script>
             <script type="text/javascript" src="js/filterListView.js"></script>
             <script type="text/javascript" src="js/featureDetailView.js"></script>
+            <script type="text/javascript" src="js/resultsListView.js"></script>
+
+            <!-- Execution entry point -->
             <script type="text/javascript" src="js/main.js"></script>
 
+        </div>
+
+        <div id="jsonp-download">
+            <!-- JSONP script tags are loaded here. -->
         </div>
 
     </body>

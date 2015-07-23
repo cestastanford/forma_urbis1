@@ -6,7 +6,7 @@
 *
 */
 
-var MapController = function(layers, filterEngine, map) {
+var MapController = function(layers, filterEngine, map, results) {
 
     /*
     *   A list of all vector layers whose features are included
@@ -77,6 +77,9 @@ var MapController = function(layers, filterEngine, map) {
 
         //  send updated array to map
         map.updateVectorFeatures(this.vectorFeatures);
+
+        //  send updated array to results list
+        results.updateResults(this.vectorFeatures);
     };
 
     /*

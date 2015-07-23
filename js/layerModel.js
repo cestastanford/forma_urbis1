@@ -55,7 +55,7 @@ var LayerModel = function(layerData) {
                 var queryString = Object.keys(layer.wfsParameters.data).reduce(function(a,k){a.push(k+'='+encodeURIComponent(layer.wfsParameters.data[k]));return a},[]).join('&');
                 jsonpRequest.src = layer.wfsParameters.url + '?' + queryString + '[' + i + ']';
                 window.JSONP_responses[i] = resolve;
-                $('body').append(jsonpRequest);
+                $('#jsonp-download').append(jsonpRequest);
             });
 
             //  on return, add each layer to the array.

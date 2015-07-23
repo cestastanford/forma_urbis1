@@ -20,6 +20,13 @@ var FeatureDetailView = function(layers) {
 
         this.$featureDetailElement.html('');
         var fields = [];
+        var field = {
+                displayName: 'Layer',
+                description: 'The vector layer the feature is from.',
+                value: feature.layer.name,
+            }
+        var fieldElement = Handlebars.templates['feature-detail'](field);
+        this.$featureDetailElement.append(fieldElement);
         for (var i = 0; i < feature.layer.fields.length; i++) {
             if (feature.properties[feature.layer.fields[i].name] !== null &&
                 feature.properties[feature.layer.fields[i].name] !== undefined &&

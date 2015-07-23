@@ -83,6 +83,7 @@ var layerDataFileObject = {
                     format_options: 'callback:JSONP_responses'
                 }
             },
+            topField: 0,
             fields: [
                 {
                     name: 'ACCEPTED_N',
@@ -199,8 +200,8 @@ var layerDataFileObject = {
                 {
                     name: 'TYPE',
                     type: 'type',
-                    subtype: '',
-                    format: 'text',
+                    subtype: 'feature',
+                    format: 'mixed-case',
                     displayName: 'Feature Type',
                     description: 'The type of feature.'
                 }
@@ -219,6 +220,7 @@ var layerDataFileObject = {
                     format_options: 'callback:JSONP_responses'
                 }
             },
+            topField: 2,
             fields: [
 
                 {
@@ -341,6 +343,7 @@ var layerDataFileObject = {
                     format_options: 'callback:JSONP_responses'
                 }
             },
+            topField: 0,
             fields: [
                 {
                     name: 'ACCENSION_',
@@ -489,6 +492,7 @@ var layerDataFileObject = {
                     format_options: 'callback:JSONP_responses'
                 }
             },
+            topField: 1,
             fields: [
 
                 {
@@ -518,8 +522,8 @@ var layerDataFileObject = {
                 {
                     name: 'TYPE',
                     type: 'type',
-                    subtype: 'landscape-type',
-                    format: 'text',
+                    subtype: 'landscape',
+                    format: 'mixed-case',
                     displayName: 'Landscape Type',
                     description: 'The type of landscape feature.'
                 },
@@ -543,8 +547,8 @@ var layerDataFileObject = {
                 {
                     name: 'CLASS',
                     type: 'type',
-                    subtype: '',
-                    format: 'text',
+                    subtype: 'river',
+                    format: 'mixed-case',
                     displayName: 'River Class',
                     description: 'The class of river section.'
                 },

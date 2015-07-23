@@ -43,7 +43,6 @@ var FilterEngine = function(layers, filterData) {
                 convertedValue !== '' &&
                 convertedValue !== 0) {
                 if (field.format !== 'default') {
-                    console.log('converting ', filter.type, ' of format ', field.format, ' with value ', convertedValue, ' to default format with value ', filterData.conversion[filter.type][field.format](convertedValue));
                     convertedValue = filterData.conversion[filter.type][field.format](convertedValue);
                 }
                 if (convertedValue !== undefined) return filter.run(convertedValue, convertedInput);

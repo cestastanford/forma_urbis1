@@ -53,11 +53,35 @@ var filterDataFileObject = {
                 },
             ],
             run: function(data, input) {
+                if (isNaN(input[0])) return false;
                 console.log(data, input);
                 var inputIsAfterData = input[0] > data[1];
                 var inputIsBeforeData = input[1] < data[0];
                 if (inputIsBeforeData || inputIsAfterData) return false;
                 return true;
+            }
+        },
+        {
+            name: 'matching-type',
+            type: 'type',
+            mode: 'any',
+            subtypes: [
+                {
+                    name: 'feature',
+                    displayName: 'Feature type'
+                },
+                {
+                    name: 'landscape',
+                    displayName: 'Landscape type',
+                },
+                {
+                    name: 'river',
+                    displayName: 'River section type',
+                },
+
+            ],
+            run: function(data, input) {
+                return (data.indexOf(input) > -1);
             }
         },
     ],
@@ -90,10 +114,15 @@ var filterDataFileObject = {
                 if (periods[input]) return periods[input];
             },
 
-        }
+        },
+        type: {
 
+            inputDefault: 'mixed-case',
+            'mixed-case': function(input) {
+                return input.toLowerCase();
+            }
 
-
+        },
     }
 };
 
