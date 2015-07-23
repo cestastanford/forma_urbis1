@@ -19,6 +19,11 @@ var FilterListView = function(filters, controller) {
     this.$submit = $('#filter-list .submit');
 
     /*
+    *   Instance variable for the submit button.
+    */
+    this.$clear = $('#filter-list .clear');
+
+    /*
     *   Adds each compiled filter template to the DOM.
     */
     for (var i = 0; i < filters.length; i++) {
@@ -60,7 +65,20 @@ var FilterListView = function(filters, controller) {
     }).bind(this));
 
     /*
-    *   Also binds any 'submit' action on the form to the submit button.
+    *   Binds the 'clear' button to clearing the fields
+    *   and resubmitting.
     */
+    this.$clear.click((function() {
+
+        //  get all input fields and clear them
+        var $inputFields = $('#filter-list .list .input');
+        $inputFields.each(function(index, element) {
+            element.value = '';
+        });
+
+        //  resubmit
+        this.$submit.trigger('click');
+
+    }).bind(this));
 
 };

@@ -84,6 +84,30 @@ var filterDataFileObject = {
                 return (data.indexOf(input) > -1);
             }
         },
+        {
+            name: 'matching-id',
+            type: 'uniqueID',
+            mode: 'any',
+            subtypes: [
+                {
+                    name: 'nolli',
+                    displayName: 'Nolli number'
+                },
+                {
+                    name: 'lanciani',
+                    displayName: 'Lanciani accession number',
+                },
+                {
+                    name: '',
+                    displayName: 'Other ID',
+                },
+
+            ],
+            run: function(data, input) {
+                console.log('comparing ', data, ' to ', input);
+                return (data === input);
+            }
+        },
     ],
     conversion: {
 
@@ -120,6 +144,14 @@ var filterDataFileObject = {
             inputDefault: 'mixed-case',
             'mixed-case': function(input) {
                 return input.toLowerCase();
+            }
+
+        },
+        uniqueID: {
+
+            inputDefault: 'unknown',
+            'unknown': function(input) {
+                return String(input);
             }
 
         },

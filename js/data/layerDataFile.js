@@ -153,7 +153,7 @@ var layerDataFileObject = {
                     name: 'NOLLI_ID',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Nolli ID',
                     description: 'The Nolli ID of the feature from the Nolli Map (same as Nolli Number).'
                 },
@@ -169,7 +169,7 @@ var layerDataFileObject = {
                     name: 'NOLLI_NUMB',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Nolli Number',
                     description: 'The Nolli Number of the feature from the Nolli Map (same as Nolli ID).'
                 },
@@ -235,7 +235,7 @@ var layerDataFileObject = {
                     name: 'Building_I',
                     type: 'uniqueID',
                     subtype: '',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Building_I',
                     description: 'Unknown field.'
                 },
@@ -251,7 +251,7 @@ var layerDataFileObject = {
                     name: 'Dome_ID',
                     type: 'uniqueID',
                     subtype: '',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Dome ID',
                     description: 'Dome identification number.'
                 },
@@ -291,7 +291,7 @@ var layerDataFileObject = {
                     name: 'Nolli_Numb',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Nolli Number',
                     description: 'The number of the feature from the Nolli map.'
                 },
@@ -349,7 +349,7 @@ var layerDataFileObject = {
                     name: 'ACCENSION_',
                     type: 'uniqueID',
                     subtype: 'lanciani',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Accension Number',
                     description: 'Reference to the plate and scavi number on the Lanciani map.'
                 },
@@ -515,7 +515,7 @@ var layerDataFileObject = {
                     name: 'NN',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'default',
+                    format: 'unknown',
                     displayName: 'Nolli Number',
                     description: 'The ID number of the feature from the Nolli map.'
                 },
