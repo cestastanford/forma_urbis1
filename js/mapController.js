@@ -36,21 +36,6 @@ var MapController = function(layers, filterEngine, map, results) {
     }
 
     /*
-    *   Filters a feature set through the applied filters.
-    */
-    this.filterFeatures = function(source, activeFilters, activeFilterInputs) {
-        var fieldMap = source.fields;
-        var features = source.geoJSON.features;
-        return features.filter((function(feature) {
-            feature.layer = source;
-            if (this.activeFilters.length === 0) return true;
-            for (var i = 0; i < this.activeFilters.length; i++) {
-                return filterEngine.filterFeature(feature, fieldMap, activeFilters[i], activeFilterInputs[i].value, activeFilterInputs[i].subtypes);
-            }
-        }).bind(this));
-    };
-
-    /*
     *   Retrieves all features from the FeatureCollections in the
     *   vectorFeatureSources list, runs them through any selected
     *   filters and sends the results, combined into one
@@ -70,7 +55,7 @@ var MapController = function(layers, filterEngine, map, results) {
 
         //  add all sources to the array
         this.vectorFeatureSources.forEach((function(source) {
-            var filteredFeatures = this.filterFeatures(source, this.activeFilters, this.activeFilterInputs);
+            var filteredFeatures = filterEngine.filterFeatures(source, this.activeFilters, this.activeFilterInputs);
             this.vectorFeatures.features = this.vectorFeatures.features.concat(filteredFeatures);
             this.vectorFeatures.totalFeatures += filteredFeatures.length;
         }).bind(this));

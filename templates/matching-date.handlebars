@@ -1,11 +1,27 @@
 <div class="filter">
     <h4>Filter by date</h4>
-    <input type="text" index="{{index}}" class="input">
-    {{#each subtypes}}
+    <div class="inputs">
+        <div style="">Find features with dates from</div>
+        <br>
         <div>
-            <input type="checkbox" index="{{index}}" class="subtype" subtype="{{name}}" checked="checked">
-            <span>{{displayName}}<span>
+            <input type="range" min={{oldestDate}} max={{newestDate}} value={{oldestDate}} index="{{index}}" class="input matching-date-slider-0" oninput="outputUpdate(value, 'matching-date-box-0')">
+            <input type="text" class="matching-date-box-0" value="{{oldestDate}}" size="5" oninput="outputUpdate(value, 'matching-date-slider-0')">
+            <span style="margin: 1em;">until</span>
+            <input type="range" min={{oldestDate}} max={{newestDate}} value={{newestDate}} index="{{index}}" class="input matching-date-slider-1" oninput="outputUpdate(value, 'matching-date-box-1')">
+            <input type="text" class="matching-date-box-1" value="{{newestDate}}" size="5" oninput="outputUpdate(value, 'matching-date-slider-1')">
         </div>
-    {{/each}}
-    <br>
+        <script>
+            function outputUpdate(date, identifier) {
+                $('.' + identifier)[0].value = date;
+            };
+        </script>
+    </div>
+    <div class="subtypes">
+        {{#each subtypes}}
+            <div>
+                <input type="checkbox" index="{{index}}" class="subtype" subtype="{{name}}" checked="checked">
+                <span>{{displayName}}<span>
+            </div>
+        {{/each}}
+    </div>
 </div>

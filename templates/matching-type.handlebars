@@ -1,11 +1,14 @@
 <div class="filter">
     <h4>Filter by type</h4>
-    <input type="text" index="{{index}}" class="input">
-    {{#each subtypes}}
-        <div>
-            <input type="checkbox" index="{{index}}" class="subtype" subtype="{{name}}" checked="checked">
-            <span>{{displayName}}<span>
-        </div>
-    {{/each}}
-    <br>
+    <div class="inputs">
+        <input type="text" index="{{index}}" class="input">
+    </div>
+    <div class="subtypes">
+        {{#each subtypes}}
+            <div>
+                <input type="checkbox" index="{{index}}" class="subtype" subtype="{{name}}" checked="checked">
+                <span>{{displayName}}<span>
+            </div>
+        {{/each}}
+    </div>
 </div>

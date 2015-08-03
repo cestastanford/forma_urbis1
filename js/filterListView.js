@@ -29,40 +29,80 @@ var FilterListView = function(filters, controller) {
     for (var i = 0; i < filters.length; i++) {
         var filterElement = Handlebars.templates[filters[i].name]({
             index: i,
-            subtypes: filters[i].subtypes
+            subtypes: filters[i].subtypes,
+            //  fetch real dates!
+            oldestDate: -2000,
+            newestDate: 2000,
         });
         this.$list.append(filterElement);
     }
 
     /*
     *   Attaches listeners to the submit button and sends
-    *   an event with all activated filters to the
-    *   mapController.
+    *   an object with all activated filters and their
+    *   input values to the mapController.
     */
     this.$submit.click((function() {
-        var $inputElements = this.$list.find('.input');
         var activeFilters = [];
         var activeFilterInputs = [];
-        $inputElements.each(function(index, element) {
-            //  for each filter with a term in the input box
-            var value = $(element).val();
-            if (value) {
+
+        //  for each filter in the list, check if it is active
+        this.$list.children().each(function(filterIndex, filterElement) {
+            var active = false;
+            var inputs = [];
+            var $inputElements = $(filterElement).find('.input');
+            $inputElements.each(function(index, inputElement) {
+                var value = $(inputElement).val();
+                if (value) {
+                    active = true;
+                    inputs.push(value);
+                }
+            });
+
+            if (active) {
                 //  send that the filter is active
-                var filterIndex = $(element).attr('index');
                 activeFilters.push(filters[filterIndex]);
                 //  send the subtypes the filter is applying to
                 var subtypes = [];
-                $(element.parentElement).find('.subtype').each(function(index, element) {
-                    if (element.checked) subtypes.push($(element).attr('subtype'));
+                $(filterElement).find('.subtype').each(function(index, subtypeElement) {
+                    if (subtypeElement.checked) subtypes.push($(subtypeElement).attr('subtype'));
                 });
                 activeFilterInputs.push({
-                    value: value,
-                    subtypes: subtypes
+                    inputs: inputs,
+                    subtypes: subtypes,
                 });
             }
         });
+
+        //  send the data to the controller
         controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
+
     }).bind(this));
+
+    // this.$submit.click((function() {
+    //     var $inputElements = this.$list.find('.input');
+    //     var activeFilters = [];
+    //     var activeFilterInputs = [];
+    //     $inputElements.each(function(index, element) {
+    //         //  for each filter with a term in the input box
+    //         var value = $(element).val();
+    //         if (value) {
+    //             //  send that the filter is active
+    //             var filterIndex = $(element).attr('index');
+    //             activeFilters.push(filters[filterIndex]);
+    //             //  send the subtypes the filter is applying to
+    //             var subtypes = [];
+    //             $(element.parentElement).find('.subtype').each(function(index, element) {
+    //                 if (element.checked) subtypes.push($(element).attr('subtype'));
+    //             });
+    //             activeFilterInputs.push({
+    //                 value: value,
+    //                 subtypes: subtypes
+    //             });
+    //         }
+    //     });
+    //     controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
+    // }).bind(this));
 
     /*
     *   Binds the 'clear' button to clearing the fields
@@ -73,7 +113,8 @@ var FilterListView = function(filters, controller) {
         //  get all input fields and clear them
         var $inputFields = $('#filter-list .list .input');
         $inputFields.each(function(index, element) {
-            element.value = '';
+            element.value = null;
+            $(element).trigger('input');
         });
 
         //  resubmit

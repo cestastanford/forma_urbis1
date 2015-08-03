@@ -54,7 +54,6 @@ var filterDataFileObject = {
             ],
             run: function(data, input) {
                 if (isNaN(input[0])) return false;
-                console.log(data, input);
                 var inputIsAfterData = input[0] > data[1];
                 var inputIsBeforeData = input[1] < data[0];
                 if (inputIsBeforeData || inputIsAfterData) return false;
@@ -104,7 +103,6 @@ var filterDataFileObject = {
 
             ],
             run: function(data, input) {
-                console.log('comparing ', data, ' to ', input);
                 return (data === input);
             }
         },
@@ -113,17 +111,23 @@ var filterDataFileObject = {
 
         text: {
 
-            inputDefault: 'mixed-case',
+            inputDefault: 'mixed-case-array',
             'mixed-case': function(input) {
                 return input.toLowerCase();
-            }
+            },
+            'mixed-case-array': function(input) {
+                return input[0].toLowerCase();
+            },
 
         },
         date: {
 
-            inputDefault: 'year',
+            inputDefault: 'year-range',
             'year': function(input) {
                 return [+input, +input];
+            },
+            'year-range': function(input) {
+                return [+input[0], +input[1]];
             },
             'text-period': function(input) {
                 var periods = {
@@ -141,18 +145,24 @@ var filterDataFileObject = {
         },
         type: {
 
-            inputDefault: 'mixed-case',
+            inputDefault: 'mixed-case-array',
             'mixed-case': function(input) {
                 return input.toLowerCase();
-            }
+            },
+            'mixed-case-array': function(input) {
+                return input[0].toLowerCase();
+            },
 
         },
         uniqueID: {
 
-            inputDefault: 'unknown',
+            inputDefault: 'unknown-array',
             'unknown': function(input) {
                 return String(input);
-            }
+            },
+            'unknown-array': function(input) {
+                return String(input[0]);
+            },
 
         },
     }

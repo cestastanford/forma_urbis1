@@ -23,6 +23,10 @@ hr {
     border: none;
 }
 
+input[type="text"] {
+    color: black;
+}
+
 #page-title {
     margin: 1rem;
 }
@@ -92,6 +96,33 @@ hr {
     margin: 0rem;
 }
 
+#filter-list .filter {
+    padding-bottom: 1em;
+}
+
+#filter-list h4 {
+    margin: 0;
+}
+
+#filter-list .inputs {
+    margin: 1em;
+}
+
+#filter-list .subtypes {
+    margin: 1em;
+}
+
+#filter-list .subtypes::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#filter-list .subtypes div {
+    float: left;
+    padding-right: 1em;
+}
+
 .layer {
     position: relative;
     margin-bottom: .5rem;
@@ -118,20 +149,6 @@ button {
     border: default;
     color: #000000;
     margin-top: 1rem;
-}
-
-.filter [type="text"] {
-    color: #000000;
-    float: left;
-}
-
-.filter div {
-    float: left;
-    margin-left: 1rem;
-}
-
-.filter h4 {
-    margin-bottom: .5rem;
 }
 
 #results-list {
