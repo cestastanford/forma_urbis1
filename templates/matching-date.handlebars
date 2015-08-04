@@ -4,14 +4,15 @@
         <div style="">Find features with dates from</div>
         <br>
         <div>
-            <input type="range" min={{oldestDate}} max={{newestDate}} value={{oldestDate}} index="{{index}}" class="input matching-date-slider-0" oninput="outputUpdate(value, 'matching-date-box-0')">
-            <input type="text" class="matching-date-box-0" value="{{oldestDate}}" size="5" oninput="outputUpdate(value, 'matching-date-slider-0')">
+            <input type="range" min={{oldestDate}} max={{newestDate}} value={{oldestDate}} index="{{index}}" class="matching-date-slider-0" oninput="updateLinked(value, 'matching-date-box-0')">
+            <input type="text" class="input matching-date-box-0" value="" size="5" oninput="updateLinked(value, 'matching-date-slider-0')">
             <span style="margin: 1em;">until</span>
-            <input type="range" min={{oldestDate}} max={{newestDate}} value={{newestDate}} index="{{index}}" class="input matching-date-slider-1" oninput="outputUpdate(value, 'matching-date-box-1')">
-            <input type="text" class="matching-date-box-1" value="{{newestDate}}" size="5" oninput="outputUpdate(value, 'matching-date-slider-1')">
+            <input type="range" min={{oldestDate}} max={{newestDate}} value={{newestDate}} index="{{index}}" class="matching-date-slider-1" oninput="updateLinked(value, 'matching-date-box-1')">
+            <input type="text" class="input matching-date-box-1" value="" size="5" oninput="updateLinked(value, 'matching-date-slider-1')">
         </div>
         <script>
-            function outputUpdate(date, identifier) {
+            function updateLinked(date, identifier) {
+                if (date === '') date = null;
                 $('.' + identifier)[0].value = date;
             };
         </script>

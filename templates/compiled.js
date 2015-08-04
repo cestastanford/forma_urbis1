@@ -71,9 +71,7 @@ templates['matching-date'] = template({"1":function(depth0,helpers,partials,data
     + alias3(((helper = (helper = helpers.oldestDate || (depth0 != null ? depth0.oldestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"oldestDate","hash":{},"data":data}) : helper)))
     + " index=\""
     + alias3(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"index","hash":{},"data":data}) : helper)))
-    + "\" class=\"input matching-date-slider-0\" oninput=\"outputUpdate(value, 'matching-date-box-0')\">\n            <input type=\"text\" class=\"matching-date-box-0\" value=\""
-    + alias3(((helper = (helper = helpers.oldestDate || (depth0 != null ? depth0.oldestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"oldestDate","hash":{},"data":data}) : helper)))
-    + "\" size=\"5\" oninput=\"outputUpdate(value, 'matching-date-slider-0')\">\n            <span style=\"margin: 1em;\">until</span>\n            <input type=\"range\" min="
+    + "\" class=\"matching-date-slider-0\" oninput=\"updateLinked(value, 'matching-date-box-0')\">\n            <input type=\"text\" class=\"input matching-date-box-0\" value=\"\" size=\"5\" oninput=\"updateLinked(value, 'matching-date-slider-0')\">\n            <span style=\"margin: 1em;\">until</span>\n            <input type=\"range\" min="
     + alias3(((helper = (helper = helpers.oldestDate || (depth0 != null ? depth0.oldestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"oldestDate","hash":{},"data":data}) : helper)))
     + " max="
     + alias3(((helper = (helper = helpers.newestDate || (depth0 != null ? depth0.newestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"newestDate","hash":{},"data":data}) : helper)))
@@ -81,9 +79,7 @@ templates['matching-date'] = template({"1":function(depth0,helpers,partials,data
     + alias3(((helper = (helper = helpers.newestDate || (depth0 != null ? depth0.newestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"newestDate","hash":{},"data":data}) : helper)))
     + " index=\""
     + alias3(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"index","hash":{},"data":data}) : helper)))
-    + "\" class=\"input matching-date-slider-1\" oninput=\"outputUpdate(value, 'matching-date-box-1')\">\n            <input type=\"text\" class=\"matching-date-box-1\" value=\""
-    + alias3(((helper = (helper = helpers.newestDate || (depth0 != null ? depth0.newestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"newestDate","hash":{},"data":data}) : helper)))
-    + "\" size=\"5\" oninput=\"outputUpdate(value, 'matching-date-slider-1')\">\n        </div>\n        <script>\n            function outputUpdate(date, identifier) {\n                $('.' + identifier)[0].value = date;\n            };\n        </script>\n    </div>\n    <div class=\"subtypes\">\n"
+    + "\" class=\"matching-date-slider-1\" oninput=\"updateLinked(value, 'matching-date-box-1')\">\n            <input type=\"text\" class=\"input matching-date-box-1\" value=\"\" size=\"5\" oninput=\"updateLinked(value, 'matching-date-slider-1')\">\n        </div>\n        <script>\n            function updateLinked(date, identifier) {\n                if (date === '') date = null;\n                $('.' + identifier)[0].value = date;\n            };\n        </script>\n    </div>\n    <div class=\"subtypes\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.subtypes : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\n</div>\n";
 },"useData":true});

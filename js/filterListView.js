@@ -79,31 +79,6 @@ var FilterListView = function(filters, controller) {
 
     }).bind(this));
 
-    // this.$submit.click((function() {
-    //     var $inputElements = this.$list.find('.input');
-    //     var activeFilters = [];
-    //     var activeFilterInputs = [];
-    //     $inputElements.each(function(index, element) {
-    //         //  for each filter with a term in the input box
-    //         var value = $(element).val();
-    //         if (value) {
-    //             //  send that the filter is active
-    //             var filterIndex = $(element).attr('index');
-    //             activeFilters.push(filters[filterIndex]);
-    //             //  send the subtypes the filter is applying to
-    //             var subtypes = [];
-    //             $(element.parentElement).find('.subtype').each(function(index, element) {
-    //                 if (element.checked) subtypes.push($(element).attr('subtype'));
-    //             });
-    //             activeFilterInputs.push({
-    //                 value: value,
-    //                 subtypes: subtypes
-    //             });
-    //         }
-    //     });
-    //     controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
-    // }).bind(this));
-
     /*
     *   Binds the 'clear' button to clearing the fields
     *   and resubmitting.
