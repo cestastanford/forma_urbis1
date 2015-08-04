@@ -17,9 +17,8 @@ var ResultsListView = function(featureDetails) {
     *   Display a given feature's details, attaching a click
     *   listener to display the object in the details box.
     */
-    this.updateResults = (function(resultsFeatureCollection) {
-        this.$resultsListElement.html('');
-        var featureList = resultsFeatureCollection.features;
+    this.addResults = (function(vectorLayer) {
+        var featureList = vectorLayer.geoJSON.features;
         for (var i = 0; i < featureList.length; i++) {
             var name = null;
             if (featureList[i].layer.topField !== undefined) {
@@ -41,5 +40,12 @@ var ResultsListView = function(featureDetails) {
         }
 
     }).bind(this);
+
+    /*
+    *   Remove all results from the list.
+    */
+    this.clear = function() {
+        this.$resultsListElement.html('');
+    };
 
 };

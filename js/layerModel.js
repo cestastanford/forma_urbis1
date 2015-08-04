@@ -61,6 +61,10 @@ var LayerModel = function(layerData) {
             //  on return, add each layer to the array.
             layerLoad.then((function(layer, response) {
                 layer.geoJSON = response;
+                if (!layer.color) {
+                    var color = '#' + Math.floor(Math.random() * 4095).toString(16);
+                    layer.color = color;
+                }
             }).bind(undefined, layer));
 
             layerLoads.push(layerLoad);

@@ -10,9 +10,10 @@ var MapController = function(layers, filterEngine, map, results) {
 
     /*
     *   A list of all vector layers whose features are included
-    *   when filtering.
+    *   when filtering, plus a list of the filtered layers.
     */
-    this.vectorFeatureSources = [];
+    this.addedVectorLayers = [];
+    this.addedFilteredVectorLayers = [];
 
     /*
     *   A list of the most recently submitted filters.
@@ -21,10 +22,9 @@ var MapController = function(layers, filterEngine, map, results) {
     this.inputValues = [];
 
     /*
-    *   The dynamically-updated GeoJSON FeatureCollection
-    *   containing all features to be displayed on the map.
+    *   A blank GeoJSON feature collection.
     */
-    this.vectorFeatures = {
+    this.blankFeatureCollection = {
         crs: {
             properties: {
                 name: 'urn:ogc:def:crs:EPSG::4326'
@@ -36,35 +36,56 @@ var MapController = function(layers, filterEngine, map, results) {
     }
 
     /*
-    *   Retrieves all features from the FeatureCollections in the
-    *   vectorFeatureSources list, runs them through any selected
-    *   filters and sends the results, combined into one
-    *   FeatureCollection, to the mapView to display.
+    *   Retrieves all layers from the addedVectorLayers list,
+    *   runs them through any selected filters and sends the
+    *   filtered layers to the mapView to display.
     */
-    this.refreshVectorFeatures = function(activeFilters, activeFilterInputs) {
-        //  clear the array
-        this.vectorFeatures.features = [];
-        this.vectorFeatures.totalFeatures = 0;
+    this.filtersSubmitted = function(activeFilters, activeFilterInputs) {
 
-        //  update the last-used filters if provided (not provided
-        //  on layer change).
-        if (activeFilters) {
-            this.activeFilters = activeFilters;
-            this.activeFilterInputs = activeFilterInputs;
+        //  update the last-used filters.
+        this.activeFilters = activeFilters;
+        this.activeFilterInputs = activeFilterInputs;
+
+
+        results.clear();
+
+        for (var i = 0; i < this.addedVectorLayers.length; i++) {
+            //  the unfiltered layer
+            var vectorLayer = this.addedVectorLayers[i]
+
+            //  find the filtered layer
+            var layerInFilteredList = this.addedFilteredVectorLayers.filter(function(addedFilteredVectorLayer) {
+                return addedFilteredVectorLayer.wfsParameters === vectorLayer.wfsParameters;
+            })[0];
+            var index = this.addedFilteredVectorLayers.indexOf(layerInFilteredList);
+
+            //  remove it from the map and the list
+            this.addedFilteredVectorLayers.splice(index, 1);
+            map.removeVectorLayer(vectorLayer);
+
+            //  add the newly-filtered layer to the map and the list
+            var filteredVectorLayer = this.filterVectorLayer(vectorLayer);
+            this.addedFilteredVectorLayers.push(filteredVectorLayer);
+            map.addVectorLayer(filteredVectorLayer);
+
+            //  update the results.
+            results.addResults(filteredVectorLayer);
         }
 
-        //  add all sources to the array
-        this.vectorFeatureSources.forEach((function(source) {
-            var filteredFeatures = filterEngine.filterFeatures(source, this.activeFilters, this.activeFilterInputs);
-            this.vectorFeatures.features = this.vectorFeatures.features.concat(filteredFeatures);
-            this.vectorFeatures.totalFeatures += filteredFeatures.length;
-        }).bind(this));
+    };
 
-        //  send updated array to map
-        map.updateVectorFeatures(this.vectorFeatures);
-
-        //  send updated array to results list
-        results.updateResults(this.vectorFeatures);
+    /*
+    *   Function to filter a single layer of features; returns
+    *   a duplicate of the layer object, except with a filtered
+    *   GeoJSON object.
+    */
+    this.filterVectorLayer = function(layer) {
+        var filteredFeatures = filterEngine.filterFeatures(layer, this.activeFilters, this.activeFilterInputs);
+        var filteredLayer = $.extend({}, layer);
+        filteredLayer.geoJSON = $.extend(true, {}, this.blankFeatureCollection);
+        filteredLayer.geoJSON.features = filteredFeatures;
+        filteredLayer.geoJSON.totalFeatures = filteredFeatures.length;
+        return filteredLayer;
     };
 
     /*
@@ -80,13 +101,33 @@ var MapController = function(layers, filterEngine, map, results) {
             else map.removeRasterLayer(layer);
         }
         else {
-            if (isChecked) this.vectorFeatureSources.push(layer);
-            else {
-                var index = this.vectorFeatureSources.indexOf(layer);
-                this.vectorFeatureSources.splice(index, 1);
+            if (isChecked) {
+                this.addedVectorLayers.push(layer);
+                var filteredVectorLayer = this.filterVectorLayer(layer);
+                this.addedFilteredVectorLayers.push(filteredVectorLayer);
+                map.addVectorLayer(filteredVectorLayer);
+                results.addResults(filteredVectorLayer)
             }
-            this.refreshVectorFeatures();
+            else {
+                //  remove from unfiltered layer list
+                var index = this.addedVectorLayers.indexOf(layer);
+                this.addedVectorLayers.splice(index, 1);
+
+                //  remove from filtered layer list
+                var layerInFilteredList = this.addedFilteredVectorLayers.filter(function(addedFilteredVectorLayer) {
+                    return addedFilteredVectorLayer.wfsParameters === layer.wfsParameters;
+                })[0];
+                var index = this.addedFilteredVectorLayers.indexOf(layerInFilteredList);
+                this.addedFilteredVectorLayers.splice(index, 1);
+
+                map.removeVectorLayer(layer);
+                results.clear();
+                for (var i = 0; i < this.addedFilteredVectorLayers.length; i++) {
+                    results.addResults(this.addedFilteredVectorLayers[i]);
+                }
+            }
         }
     };
+
 
 };

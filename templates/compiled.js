@@ -36,7 +36,11 @@ templates['layer'] = template({"1":function(depth0,helpers,partials,data) {
 },"5":function(depth0,helpers,partials,data) {
     return "<span class=\"layer-type-marker raster\">ⓡ</span>\n    ";
 },"7":function(depth0,helpers,partials,data) {
-    return "<span class=\"layer-type-marker vector\">ⓥ</span>\n";
+    var helper;
+
+  return "<span class=\"layer-type-marker vector\" style=\"color: "
+    + this.escapeExpression(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"color","hash":{},"data":data}) : helper)))
+    + "; text-shadow: 0px 0px 5px #fff, 0px 0px 5px #fff\">ⓥ</span>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 

@@ -29,7 +29,8 @@ var LayerListView = function(layers, controller) {
         var $vectorElement = $(Handlebars.templates.layer({
             name: layers.vector[i].name,
             index: i,
-            raster: false
+            raster: false,
+            color: layers.vector[i].color,
         }));
         this.$list.append($vectorElement);
     }

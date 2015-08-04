@@ -21,9 +21,7 @@ var MapView = function(featureDetails) {
     *   Point marker style.
     */
     var MARKER_OPTIONS = {
-        radius: 5,
-        fillColor: "#ff7800",
-        color: "#000",
+        radius: 4,
         weight: 1,
         opacity: 1,
         fillOpacity: 0.8
@@ -33,9 +31,8 @@ var MapView = function(featureDetails) {
     *   Polygon style.
     */
     var POLYGON_STYLE = {
-        "color": "#ff7800",
         "weight": 1,
-        "opacity": 0.4
+        "opacity": 0.6
     };
 
     /*
@@ -49,11 +46,9 @@ var MapView = function(featureDetails) {
     this.rasterLayersOnMap = [];
 
     /*
-    *   The vector layer on the map provided by mapController,
-    *   containing all the features from the vector layers
-    *   after they've been filtered.
+    *   Array of (filtered) vector layers currently on the map.
     */
-    this.vectorLayerOnMap = null;
+    this.vectorLayersOnMap = [];
 
     /*
     *   Adds a new raster layer to the Leaflet map.
@@ -72,26 +67,23 @@ var MapView = function(featureDetails) {
     }
 
     /*
-    *   Removes a raster layer to the Leaflet map.
+    *   Removes a raster layer from the Leaflet map.
     */
     this.removeRasterLayer = function(rasterLayerToRemove) {
-
+        //  gets a reference to the existing layer on the map
         var rasterLayerOnMap = this.rasterLayersOnMap.filter(function(rasterLayerOnMap) {
             return rasterLayerToRemove.wmsParameters === rasterLayerOnMap.parameters;
         })[0];
         this.mapElement.removeLayer(rasterLayerOnMap.leafletLayer);
         var index = this.rasterLayersOnMap.indexOf(rasterLayerOnMap);
         this.rasterLayersOnMap.splice(index, 1);
-
     }
 
     /*
-    *   Creates a new GeoJSON layer in Leaflet map for the
-    *   GeoJSON FeatureCollection provided.
+    *   Adds a vector layers to the Leaflet map.
     */
-    this.updateVectorFeatures = function(geoJsonVectorData) {
-        if (this.vectorLayerOnMap) this.mapElement.removeLayer(this.vectorLayerOnMap);
-        this.vectorLayerOnMap = L.geoJson(geoJsonVectorData, {
+    this.addVectorLayer = function(vectorLayerToAdd) {
+        var newVectorLayer = L.geoJson(vectorLayerToAdd.geoJSON, {
 
             onEachFeature: function(feature, layer) {
                 layer.on('click', function() {
@@ -103,11 +95,53 @@ var MapView = function(featureDetails) {
                 return L.circleMarker(latlng, MARKER_OPTIONS);
             },
 
-            style: POLYGON_STYLE
+            style: $.extend({}, POLYGON_STYLE, {color: vectorLayerToAdd.color}),
 
         });
-        this.mapElement.addLayer(this.vectorLayerOnMap);
+        this.mapElement.addLayer(newVectorLayer);
+        this.vectorLayersOnMap.push({
+            parameters: vectorLayerToAdd.wfsParameters,
+            leafletLayer: newVectorLayer,
+        });
+    }
 
-    };
+    /*
+    *   Removes a vector layer from the Leaflet map.
+    */
+    this.removeVectorLayer = function(vectorLayerToRemove) {
+        //  gets a reference to the existing layer on the map
+        var vectorLayerOnMap = this.vectorLayersOnMap.filter(function(vectorLayerOnMap) {
+            return vectorLayerToRemove.wfsParameters === vectorLayerOnMap.parameters;
+        })[0];
+        this.mapElement.removeLayer(vectorLayerOnMap.leafletLayer);
+        var index = this.vectorLayersOnMap.indexOf(vectorLayerOnMap);
+        this.vectorLayersOnMap.splice(index, 1);
+    }
+
+
+    // /*
+    // *   Creates a new GeoJSON layer in Leaflet map for the
+    // *   GeoJSON FeatureCollection provided.
+    // */
+    // this.updateVectorFeatures = function(geoJsonVectorData) {
+    //     if (this.vectorLayerOnMap) this.mapElement.removeLayer(this.vectorLayerOnMap);
+    //     this.vectorLayerOnMap = L.geoJson(geoJsonVectorData, {
+
+    //         onEachFeature: function(feature, layer) {
+    //             layer.on('click', function() {
+    //                 featureDetails.display(feature);
+    //             });
+    //         },
+
+    //         pointToLayer: function (feature, latlng) {
+    //             return L.circleMarker(latlng, MARKER_OPTIONS);
+    //         },
+
+    //         style: POLYGON_STYLE
+
+    //     });
+    //     this.mapElement.addLayer(this.vectorLayerOnMap);
+
+    // };
 
 };

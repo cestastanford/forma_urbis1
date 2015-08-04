@@ -75,7 +75,7 @@ var FilterListView = function(filters, controller) {
         });
 
         //  send the data to the controller
-        controller.refreshVectorFeatures(activeFilters, activeFilterInputs);
+        controller.filtersSubmitted(activeFilters, activeFilterInputs);
 
     }).bind(this));
 
@@ -93,7 +93,7 @@ var FilterListView = function(filters, controller) {
         });
 
         //  resubmit
-        this.$submit.trigger('click');
+        controller.filtersSubmitted([], []);
 
     }).bind(this));
 
