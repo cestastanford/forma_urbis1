@@ -70,7 +70,6 @@ var LayerModel = function(layerData) {
                     counter += 1;
                     layer.color = 'hsl(' + hue + ', 100%, 65%)';
                 }
-                console.log(response);
             }).bind(undefined, layer));
 
             layerLoads.push(layerLoad);

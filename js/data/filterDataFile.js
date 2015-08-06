@@ -130,6 +130,8 @@ var filterDataFileObject = {
                 return [+input[0], +input[1]];
             },
             'text-period': function(input) {
+                var FIRST_DATE = -2000;
+                var LAST_DATE = 2015;
                 var periods = {
                     'Kingdom': [-1000, -508],
                     'Republic': [-509, -26],
@@ -149,7 +151,19 @@ var filterDataFileObject = {
                     'Fascism': [1923, 1945],
                     'Post-WWII': [1946, 2015],
                 };
-                if (periods[input]) return periods[input];
+                var inputArray = input.split('/');
+                if (inputArray.length > 1) {
+
+                    var range = inputArray.reduce(function(previous, current) {
+                        if (periods[current]) {
+                            if (periods[current][0] < previous[0]) previous[0] = periods[current][0];
+                            if (periods[current][1] > previous[1]) previous[1] = periods[current][1];
+                        }
+                        return previous;
+                    }, [LAST_DATE, FIRST_DATE]);
+                    if (range[0] < range[1]) return range;
+
+                } else if (periods[input]) return periods[input];
             },
 
         },
