@@ -138,6 +138,16 @@ var filterDataFileObject = {
                     'Medieval': [600, 1419],
                     'Early Modern': [1420, 1797],
                     'Modern': [1798, 2015],
+                    'Early Christian': [700, 1420],
+                    'Early Renaissance': [1421, 1500],
+                    'High Renaissance': [1501, 1527],
+                    'Late Renaissance': [1528, 1600],
+                    'Baroque': [1601, 1700],
+                    'Late Baroque': [1701, 1750],
+                    'Neoclassical': [1751, 1850],
+                    'Roma Capitale': [1870, 1922],
+                    'Fascism': [1923, 1945],
+                    'Post-WWII': [1946, 2015],
                 };
                 if (periods[input]) return periods[input];
             },
