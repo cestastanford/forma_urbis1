@@ -44,6 +44,9 @@ var LayerModel = function(layerData) {
         *   the layer data from the data file and the downloaded GeoJSON
         *   FeatureCollection.
         */
+
+        var counter = Math.floor(Math.random() * 360);
+
         var layersToLoad = layerData.vector.length;
         var layerLoads = [];
         window.JSONP_responses = [];
@@ -60,11 +63,14 @@ var LayerModel = function(layerData) {
 
             //  on return, add each layer to the array.
             layerLoad.then((function(layer, response) {
+
                 layer.geoJSON = response;
                 if (!layer.color) {
-                    var color = '#' + Math.floor(Math.random() * 4095).toString(16);
-                    layer.color = color;
+                    var hue = counter * 80;
+                    counter += 1;
+                    layer.color = 'hsl(' + hue + ', 100%, 65%)';
                 }
+                console.log(response);
             }).bind(undefined, layer));
 
             layerLoads.push(layerLoad);

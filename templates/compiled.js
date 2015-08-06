@@ -1,13 +1,21 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['feature-detail'] = template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+templates['feature-detail'] = template({"1":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return " style=\"color: "
+    + this.escapeExpression(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"color","hash":{},"data":data}) : helper)))
+    + ";\"";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "<li class=\"feature-detail\" title=\""
     + alias3(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
     + "\">\n    <span class=\"field-name\">"
     + alias3(((helper = (helper = helpers.displayName || (depth0 != null ? depth0.displayName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"displayName","hash":{},"data":data}) : helper)))
-    + ":</span>\n    <span class=\"field-value\">"
+    + ":</span>\n    <span class=\"field-value\""
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.color : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + ">"
     + alias3(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"value","hash":{},"data":data}) : helper)))
     + "</span>\n</li>\n";
 },"useData":true});
@@ -21,10 +29,12 @@ templates['feature-result'] = template({"1":function(depth0,helpers,partials,dat
   return "feature #"
     + this.escapeExpression(((helper = (helper = helpers.number || (depth0 != null ? depth0.number : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"number","hash":{},"data":data}) : helper)));
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper;
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "<li class=\"result\">\n    <span class=\"layer\">"
-    + this.escapeExpression(((helper = (helper = helpers.layer || (depth0 != null ? depth0.layer : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"layer","hash":{},"data":data}) : helper)))
+  return "<li class=\"result\">\n    <span class=\"layer\" style=\"color: "
+    + alias3(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"color","hash":{},"data":data}) : helper)))
+    + ";\">"
+    + alias3(((helper = (helper = helpers.layer || (depth0 != null ? depth0.layer : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"layer","hash":{},"data":data}) : helper)))
     + ": </span>\n    <span class=\"name\">"
     + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.name : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>\n</li>\n";
@@ -40,7 +50,7 @@ templates['layer'] = template({"1":function(depth0,helpers,partials,data) {
 
   return "<span class=\"layer-type-marker vector\" style=\"color: "
     + this.escapeExpression(((helper = (helper = helpers.color || (depth0 != null ? depth0.color : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"color","hash":{},"data":data}) : helper)))
-    + "; text-shadow: 0px 0px 5px #fff, 0px 0px 5px #fff\">ⓥ</span>\n";
+    + ";\">ⓥ</span>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -83,7 +93,7 @@ templates['matching-date'] = template({"1":function(depth0,helpers,partials,data
     + alias3(((helper = (helper = helpers.newestDate || (depth0 != null ? depth0.newestDate : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"newestDate","hash":{},"data":data}) : helper)))
     + " index=\""
     + alias3(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"index","hash":{},"data":data}) : helper)))
-    + "\" class=\"matching-date-slider-1\" oninput=\"updateLinked(value, 'matching-date-box-1')\">\n            <input type=\"text\" class=\"input matching-date-box-1\" value=\"\" size=\"5\" oninput=\"updateLinked(value, 'matching-date-slider-1')\">\n        </div>\n        <script>\n            function updateLinked(date, identifier) {\n                if (date === '') date = null;\n                $('.' + identifier)[0].value = date;\n            };\n        </script>\n    </div>\n    <div class=\"subtypes\">\n"
+    + "\" class=\"matching-date-slider-1\" oninput=\"updateLinked(value, 'matching-date-box-1')\">\n            <input type=\"text\" class=\"input matching-date-box-1\" value=\"\" size=\"5\" oninput=\"updateLinked(value, 'matching-date-slider-1')\">\n        </div>\n        <script>\n            function updateLinked(date, identifier) {\n                if (date === '') date = null;\n                $('.' + identifier)[0].value = date;\n                $('button.submit').click();\n            };\n        </script>\n    </div>\n    <div class=\"subtypes\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.subtypes : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\n</div>\n";
 },"useData":true});

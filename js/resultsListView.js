@@ -31,6 +31,7 @@ var ResultsListView = function(featureDetails) {
                 layer: featureList[i].layer.name,
                 name: name,
                 number: featureList[i].layer.geoJSON.features.indexOf(featureList[i]),
+                color: featureList[i].layer.color,
 
             }));
             this.$resultsListElement.append($element);

@@ -24,6 +24,7 @@ var FeatureDetailView = function(layers) {
                 displayName: 'Layer',
                 description: 'The vector layer the feature is from.',
                 value: feature.layer.name,
+                color: feature.layer.color,
             }
         var fieldElement = Handlebars.templates['feature-detail'](field);
         this.$featureDetailElement.append(fieldElement);
