@@ -1,21 +1,57 @@
 <div class="filter">
     <h4>Filter by date</h4>
     <div class="inputs">
-        <div style="">Find features with dates from</div>
-        <br>
-        <div>
-            <input type="range" min={{oldestDate}} max={{newestDate}} value={{oldestDate}} index="{{index}}" class="matching-date-slider-0" oninput="updateLinked(value, 'matching-date-box-0')">
-            <input type="text" class="input matching-date-box-0" value="" size="5" oninput="updateLinked(value, 'matching-date-slider-0')">
-            <span style="margin: 1em;">until</span>
-            <input type="range" min={{oldestDate}} max={{newestDate}} value={{newestDate}} index="{{index}}" class="matching-date-slider-1" oninput="updateLinked(value, 'matching-date-box-1')">
-            <input type="text" class="input matching-date-box-1" value="" size="5" oninput="updateLinked(value, 'matching-date-slider-1')">
+        <div style="padding-bottom: 70px;">
+            <div index="{{index}}" id="timeline"></div>
         </div>
+        <span>
+            <input type="number" index="{{index}}" class="input" id="start-date">
+            <span style="padding: 10px;">to</span>
+            <input type="number" index="{{index}}" class="input" id="end-date">
+        </span>
         <script>
-            function updateLinked(date, identifier) {
-                if (date === '') date = null;
-                $('.' + identifier)[0].value = date;
-                $('button.submit').click();
-            };
+            (function(undefined) {
+                var slider = $('#timeline')[0];
+
+                noUiSlider.create(slider, {
+                    start: [-1000, 2015],
+                    step: 1,
+                    margin: 1,
+                    connect: true,
+                    direction: 'ltr',
+                    orientation: 'horizontal',
+                    behavior: 'tap-drag',
+                    range: {
+                        min: -1000,
+                        max: 2015,
+                    },
+                    pips: {
+                        mode: 'values',
+                        density: 3,
+                        values: [-1000, 0, 500, 1000, 1500, 2000],
+                        format: wNumb({
+                            decimals: 0,
+                            negative: 'BCE ',
+                        }),
+                    },
+                });
+
+                slider.noUiSlider.on('update', function(values, handle) {
+                    var value = Math.floor(values[handle]);
+                    if (handle) $('#end-date')[0].value = value;
+                    else $('#start-date')[0].value = value;
+                    $('button[type="submit"]').click();
+                });
+
+                $('#start-date, #end-date').change(function(event) {
+                    var handle = 0;
+                    if (event.target.id === 'end-date') handle = 1;
+                    var array = [null, null];
+                    array[handle] = event.target.value;
+                    slider.noUiSlider.set(array);
+                });
+
+            })()
         </script>
     </div>
     <div class="subtypes">

@@ -31,8 +31,8 @@ var FilterListView = function(filters, controller) {
             index: i,
             subtypes: filters[i].subtypes,
             //  fetch real dates!
-            oldestDate: -2000,
-            newestDate: 2000,
+            firstDate: -2000,
+            lastDate: 2015,
         });
         this.$list.append(filterElement);
     }
