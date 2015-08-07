@@ -12,6 +12,7 @@
         <script>
             (function(undefined) {
                 var slider = $('#timeline')[0];
+                var fields = [$('#start-date')[0], $('#end-date')[0]];
 
                 noUiSlider.create(slider, {
                     start: [-1000, 2015],
@@ -20,7 +21,7 @@
                     connect: true,
                     direction: 'ltr',
                     orientation: 'horizontal',
-                    behavior: 'tap-drag',
+                    behaviour: 'drag-tap',
                     range: {
                         min: -1000,
                         max: 2015,
@@ -37,19 +38,22 @@
                 });
 
                 slider.noUiSlider.on('update', function(values, handle) {
-                    var value = Math.floor(values[handle]);
-                    if (handle) $('#end-date')[0].value = value;
-                    else $('#start-date')[0].value = value;
+                    fields[0].value = Math.floor(values[0]);
+                    fields[1].value = Math.floor(values[1]);
                     $('button[type="submit"]').click();
                 });
 
-                $('#start-date, #end-date').change(function(event) {
+                $(fields).change(function(event) {
+                    if (event.target.value === '') return;
                     var handle = 0;
                     if (event.target.id === 'end-date') handle = 1;
                     var array = [null, null];
                     array[handle] = event.target.value;
                     slider.noUiSlider.set(array);
                 });
+
+                fields[0].value = '';
+                fields[1].value = '';
 
             })()
         </script>
