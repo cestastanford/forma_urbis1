@@ -45,25 +45,12 @@ input {
     background-color: #fff;
 }
 
-#feature-details {
+.leaflet-popup-content-wrapper {
     border: 5px solid #fff;
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    width: 15rem;
-    height: 18rem;
+    max-width: 15rem;
+    max-height: 15rem;
     background-color: #bbb;
-    padding: 1rem;
-}
-
-#feature-details .label {
-    margin: 0rem;
-}
-
-#feature-details .list {
-    overflow: scroll;
-    font-size: small;
-    height: 84%;
+    overflow-y: scroll;
 }
 
 .field-name {
@@ -154,12 +141,6 @@ button {
 #results-list {
     background-color: #bbb;
     float: right;
-    width: auto;
-    height: auto;
-    max-width: 350px;
-    max-height: 350px;
-    overflow-y: scroll;
-    overflow-x: hidden;
     border: 1rem solid #bbb;
     margin: 1rem;
     white-space: nowrap;
@@ -167,6 +148,13 @@ button {
 
 #results-list .label {
     margin: 0rem;
+}
+
+#results-list .list {
+    max-width: 350px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .result {

@@ -6,7 +6,12 @@
 *
 */
 
-var ResultsListView = function(featureDetails) {
+var ResultsListView = function(map) {
+
+    /*
+    *   The number of results in the list.
+    */
+    this.nResults = 0;
 
     /*
     *   Reference to the feature detail box element.
@@ -19,6 +24,8 @@ var ResultsListView = function(featureDetails) {
     */
     this.addResults = (function(vectorLayer) {
         var featureList = vectorLayer.geoJSON.features;
+        this.nResults += featureList.length;
+        $('#results-list .label').html('Features on Map (' + this.nResults + ')');
         for (var i = 0; i < featureList.length; i++) {
             var name = null;
             if (featureList[i].layer.topField !== undefined) {
@@ -35,9 +42,10 @@ var ResultsListView = function(featureDetails) {
 
             }));
             this.$resultsListElement.append($element);
-            $element.click((function(feature) {
-                featureDetails.display(feature);
-            }).bind(undefined, featureList[i]));
+            $element.click((function(feature, $element) {
+                map.showFeatureDetails(feature);
+                $element.addClass('highlighted');
+            }).bind(undefined, featureList[i], $element));
         }
 
     }).bind(this);
@@ -47,6 +55,8 @@ var ResultsListView = function(featureDetails) {
     */
     this.clear = function() {
         this.$resultsListElement.html('');
+        this.nResults = 0;
+        $('#results-list .label').html('Features on Map (' + this.nResults + ')');
     };
 
 };
