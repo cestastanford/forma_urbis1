@@ -1,7 +1,12 @@
 <div class="filter">
     <h4>Filter by type</h4>
     <div class="inputs">
-        <input type="text" index="{{index}}" class="input">
+        <select index="{{index}}" class="input">
+            <option value="" selected></option>
+            {{#each types}}
+                <option value="{{@key}}">{{@key}} ({{this}})</option>
+            {{/each}}
+        </select>
     </div>
     <div class="subtypes">
         {{#each subtypes}}

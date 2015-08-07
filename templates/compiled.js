@@ -109,6 +109,16 @@ templates['matching-id'] = template({"1":function(depth0,helpers,partials,data) 
 templates['matching-type'] = template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
+  return "                <option value=\""
+    + alias3(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"key","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"key","hash":{},"data":data}) : helper)))
+    + " ("
+    + alias3(this.lambda(depth0, depth0))
+    + ")</option>\n";
+},"3":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
   return "            <div>\n                <input type=\"checkbox\" index=\""
     + alias3(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"index","hash":{},"data":data}) : helper)))
     + "\" class=\"subtype\" subtype=\""
@@ -119,10 +129,12 @@ templates['matching-type'] = template({"1":function(depth0,helpers,partials,data
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var stack1, helper;
 
-  return "<div class=\"filter\">\n    <h4>Filter by type</h4>\n    <div class=\"inputs\">\n        <input type=\"text\" index=\""
+  return "<div class=\"filter\">\n    <h4>Filter by type</h4>\n    <div class=\"inputs\">\n        <select index=\""
     + this.escapeExpression(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"index","hash":{},"data":data}) : helper)))
-    + "\" class=\"input\">\n    </div>\n    <div class=\"subtypes\">\n"
-    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.subtypes : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "\" class=\"input\">\n            <option value=\"\" selected></option>\n"
+    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.types : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "        </select>\n    </div>\n    <div class=\"subtypes\">\n"
+    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.subtypes : depth0),{"name":"each","hash":{},"fn":this.program(3, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\n</div>\n";
 },"useData":true});
 templates['text-attribute'] = template({"1":function(depth0,helpers,partials,data) {

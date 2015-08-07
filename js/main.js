@@ -52,13 +52,6 @@
         var controller = new MapController(layers, filterEngine, map, results);
 
         /*
-        *   Creates the filter list view, which populates the filter
-        *   list with the filters found in the filter model; sends
-        *   interaction events to the controller.
-        */
-        var filterList = new FilterListView(filterData.filters, controller);
-
-        /*
         *   Starts the asynchronous downloading of the WFS layers,
         *   loading the rest of the site upon completion.
         */
@@ -70,6 +63,13 @@
             *   interaction events to the controller.
             */
             var layerList = new LayerListView(layers, controller);
+
+            /*
+            *   Creates the filter list view, which populates the filter
+            *   list with the filters found in the filter model; sends
+            *   interaction events to the controller.
+            */
+            var filterList = new FilterListView(filterData.filters, controller, layers);
 
             /*
             *   Displays an initial map from the initial map settings.

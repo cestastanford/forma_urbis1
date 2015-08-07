@@ -6,7 +6,7 @@
 *
 */
 
-var FilterListView = function(filters, controller) {
+var FilterListView = function(filters, controller, layers) {
 
     /*
     *   Instance variable for the list element.
@@ -29,10 +29,12 @@ var FilterListView = function(filters, controller) {
     for (var i = 0; i < filters.length; i++) {
         var filterElement = Handlebars.templates[filters[i].name]({
             index: i,
+            types: layers.types,
             subtypes: filters[i].subtypes,
             //  fetch real dates!
             firstDate: -2000,
             lastDate: 2015,
+            //  type hack
         });
         this.$list.append(filterElement);
     }

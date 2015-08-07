@@ -31,6 +31,27 @@ var LayerModel = function(layerData) {
     *   Creates the soon-to-be-populated list of vector layers.
     */
     this.vector = [];
+    //  hack for getting tokenized type names
+    this.types = {};
+    this.getTypes = function() {
+        for (var i = 0; i < this.vector.length; i++) {
+            var layer = this.vector[i];
+            for (var j = 0; j < layer.fields.length; j++) {
+                var field = layer.fields[j];
+                if (field.type === 'type') {
+                    for (var k = 0; k < layer.geoJSON.features.length; k++) {
+                        var feature = layer.geoJSON.features[k];
+                        var type = feature.properties[field.name]
+                        if (type) {
+                            if (this.types[type]) {
+                                this.types[type] += 1;
+                            } else this.types[type] = 1;
+                        }
+                    }
+                }
+            }
+        }
+    };
 
     /*
     *   Definition of the init method to begin layer prepration;
@@ -77,6 +98,7 @@ var LayerModel = function(layerData) {
 
         Promise.all(layerLoads).then((function() {
             this.vector = layerData.vector;
+            this.getTypes();
             callback();
 
         }).bind(this));
