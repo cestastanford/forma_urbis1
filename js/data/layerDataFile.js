@@ -25,19 +25,19 @@ var layerDataFileObject = {
     */
 
         //  Nolli Map
-        {
-            name: "Nolli Map",
-            type: 'raster',
-            wmsParameters: {
-                url: "http://localhost:8080/geoserver/wms",
-                parameterObject: {
-                    layers: "fur:nolli_map",
-                    format: "image/png",
-                    attribution: "Nolli Map",
-                    transparent: true
-                }
-            }
-        },
+        // {
+        //     name: "Nolli Map",
+        //     type: 'raster',
+        //     wmsParameters: {
+        //         url: "http://localhost:8080/geoserver/wms",
+        //         parameterObject: {
+        //             layers: "fur:nolli_map_reprojected",
+        //             format: "image/png",
+        //             attribution: "Nolli Map",
+        //             transparent: true
+        //         }
+        //     }
+        // },
     ],
 
     vector: [
@@ -72,6 +72,7 @@ var layerDataFileObject = {
         //  Nolli Points Golden (reprojected)
         {
             name: 'Nolli Points',
+            dataName: 'nolli_points',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {
@@ -209,6 +210,7 @@ var layerDataFileObject = {
         },
         {
             name: 'Domes',
+            dataName: 'domes',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {
@@ -331,14 +333,15 @@ var layerDataFileObject = {
             ]
         },
         {
-            name: 'Excavations',
+            name: 'Scavi Points',
+            dataName: 'scavi_points',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {
                     service: 'WFS',
                     version: '1.0.0',
                     request: 'GetFeature',
-                    typeName: 'fur:excavations',
+                    typeName: 'fur:scavi_points',
                     outputFormat: 'text/javascript',
                     format_options: 'callback:JSONP_responses'
                 }
@@ -370,23 +373,7 @@ var layerDataFileObject = {
                     description: 'The excavator of the feature.'
                 },
                 {
-                    name: 'EXCAVATOR1',
-                    type: 'text',
-                    subtype: 'person',
-                    format: 'mixed-case',
-                    displayName: 'Alternate Excavator',
-                    description: 'An alternate excavator of the feature.'
-                },
-                {
-                    name: 'EXCAVATO_1',
-                    type: 'text',
-                    subtype: 'person',
-                    format: 'mixed-case',
-                    displayName: 'Alternate Excavator',
-                    description: 'An alternate excavator of the feature.'
-                },
-                {
-                    name: 'END_DATE_1',
+                    name: 'End_DATE',
                     type: 'date',
                     subtype: 'end',
                     format: 'year',
@@ -394,20 +381,6 @@ var layerDataFileObject = {
                     description: 'The end date of the feature excavation.'
                 },
                 {
-                    name: 'END_DATE_2',
-                    type: 'date',
-                    subtype: 'end',
-                    format: 'year',
-                    displayName: 'Alternate Excavation End Date',
-                    description: 'An alternate end date of the feature excavation.'
-                },                {
-                    name: 'END_DATE_3',
-                    type: 'date',
-                    subtype: 'end',
-                    format: 'year',
-                    displayName: 'Alternate Excavation End Date',
-                    description: 'An alternate end date of the feature excavation.'
-                },                {
                     name: 'IMAGES',
                     type: 'ext-resource',
                     subtype: 'image',
@@ -415,14 +388,14 @@ var layerDataFileObject = {
                     displayName: 'Image Link',
                     description: 'A link to an image of the feature.'
                 },                {
-                    name: 'NOTES',
+                    name: 'ERRATA',
                     type: 'text',
                     subtype: 'note',
                     format: 'mixed-case',
                     displayName: 'Notes',
                     description: 'Notes about the feature.'
                 },                {
-                    name: 'SITE',
+                    name: 'SITE_Othe',
                     type: 'location',
                     subtype: 'primary',
                     format: 'text',
@@ -438,34 +411,27 @@ var layerDataFileObject = {
                     description: 'The start date of the feature excavation.'
                 },
                 {
-                    name: 'START_DA_1',
-                    type: 'date',
-                    subtype: 'start',
-                    format: 'year',
-                    displayName: 'Alternate Excavation Start Date',
-                    description: 'An alternate start date of the feature excavation.'
-                },
-                {
-                    name: 'START_DA_2',
-                    type: 'date',
-                    subtype: 'start',
-                    format: 'year',
-                    displayName: 'Alternate Excavation Start Date',
-                    description: 'An alternate start date of the feature excavation.'
-                },
-                {
-                    name: 'STORIA_DEG',
+                    name: 'HISTORICAL',
                     type: 'text',
                     subtype: 'note',
                     format: 'mixed-case',
                     displayName: 'Historical Note',
                     description: 'A historical note about the feature.'
                 },
+                {
+                    name: 'FULL_TEXT',
+                    type: 'text',
+                    subtype: '',
+                    format: 'mixed-case',
+                    displayName: 'Full Text',
+                    description: 'The full text from the source of the annotation.'
+                },
 
             ]
         },
         {
             name: 'Lanciani Streets',
+            dataName: 'lanciani_streets',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {
@@ -481,6 +447,7 @@ var layerDataFileObject = {
         },
         {
             name: 'Landscape Elements',
+            dataName: 'landscape_elements',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {
@@ -532,6 +499,7 @@ var layerDataFileObject = {
         },
         {
             name: 'Tiber',
+            dataName: 'tiber',
             wfsParameters: {
                 url: "http://localhost:8080/geoserver/ows",
                 data: {

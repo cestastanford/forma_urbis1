@@ -25,7 +25,7 @@ var ResultsListView = function(map) {
     this.addResults = (function(vectorLayer) {
         var featureList = vectorLayer.geoJSON.features;
         this.nResults += featureList.length;
-        $('#results-list .label').html('Features on Map (' + this.nResults + ')');
+        $('#results-list .label').html('Filter Results (' + this.nResults + ')');
         for (var i = 0; i < featureList.length; i++) {
             var name = null;
             if (featureList[i].layer.topField !== undefined) {
@@ -56,7 +56,7 @@ var ResultsListView = function(map) {
     this.clear = function() {
         this.$resultsListElement.html('');
         this.nResults = 0;
-        $('#results-list .label').html('Features on Map (' + this.nResults + ')');
+        $('#results-list .label').html('Filter Results (' + this.nResults + ')');
     };
 
 };

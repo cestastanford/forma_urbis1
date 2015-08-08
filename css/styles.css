@@ -31,15 +31,23 @@ input {
     margin: 1rem;
 }
 
+#wrapper {
+    overflow: auto;
+    height: auto;
+}
+
+#filter-list-and-results {
+    float: right;
+}
+
 #map-and-feature-list {
-    width: 100vp;
-    height: 35rem;
+    height: 87vh;
     margin: 1rem;
     position: relative;
+    overflow: hidden;
 }
 
 #map {
-    border: 5px solid #fff;
     height: 100%;
     width: 100%;
     background-color: #fff;
@@ -58,12 +66,15 @@ input {
 }
 
 #layer-list {
-    float: left;
     background-color: #bbb;
     width: auto;
     height: auto;
     padding: 1rem;
     margin: 1rem;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: 5px solid #fff
 }
 
 #layer-list .label {
@@ -71,7 +82,6 @@ input {
 }
 
 #filter-list {
-    float: left;
     background-color: #bbb;
     width: auto;
     height: auto;
@@ -140,10 +150,10 @@ button {
 
 #results-list {
     background-color: #bbb;
-    float: right;
-    border: 1rem solid #bbb;
+    padding: 1rem;
     margin: 1rem;
     white-space: nowrap;
+    width: auto;
 }
 
 #results-list .label {

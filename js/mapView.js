@@ -64,6 +64,9 @@ var MapView = function(layers) {
             leafletLayer: newRasterLayer
         });
 
+
+        // var newLayer = L.tileLayer('data/raster/nolli_map_reprojected/{z}/{x}/{y}.png', {tms: true});
+        // this.mapElement.addLayer(newLayer);
     }
 
     /*
