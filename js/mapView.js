@@ -84,6 +84,7 @@ var MapView = function(layers) {
     *   Adds a vector layers to the Leaflet map.
     */
     this.addVectorLayer = function(vectorLayerToAdd) {
+        console.log(vectorLayerToAdd);
         var newVectorLayer = L.geoJson(vectorLayerToAdd.geoJSON, {
 
             onEachFeature: (function(feature, layer) {
@@ -100,6 +101,7 @@ var MapView = function(layers) {
 
         });
         this.mapElement.addLayer(newVectorLayer);
+        if (vectorLayerToAdd.geoJSON.features[0].geometry.type !== 'Point') newVectorLayer.bringToBack();
         this.vectorLayersOnMap.push({
             name: vectorLayerToAdd.name,
             leafletLayer: newVectorLayer,
