@@ -113,10 +113,10 @@ var filterDataFileObject = {
 
             inputDefault: 'mixed-case-array',
             'mixed-case': function(input) {
-                return input.toLowerCase();
+                return ('' + input).toLowerCase();
             },
             'mixed-case-array': function(input) {
-                return input[0].toLowerCase();
+                return ('' + input[0]).toLowerCase();
             },
 
         },
@@ -171,10 +171,10 @@ var filterDataFileObject = {
 
             inputDefault: 'mixed-case-array',
             'mixed-case': function(input) {
-                return input.toLowerCase();
+                return ('' + input).toLowerCase();
             },
             'mixed-case-array': function(input) {
-                return input[0].toLowerCase();
+                return ('' + input[0]).toLowerCase();
             },
 
         },
@@ -182,10 +182,10 @@ var filterDataFileObject = {
 
             inputDefault: 'mixed-case-array',
             'mixed-case': function(input) {
-                return input.toLowerCase();
+                return ('' + input).toLowerCase();
             },
             'mixed-case-array': function(input) {
-                return input[0].toLowerCase();
+                return ('' + input[0]).toLowerCase();
             },
 
         },
