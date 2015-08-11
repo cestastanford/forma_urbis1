@@ -55,18 +55,16 @@ var MapView = function(layers) {
     */
     this.addRasterLayer = function(rasterLayerToAdd) {
 
-        var newRasterLayer = L.tileLayer.wms(
-            rasterLayerToAdd.wmsParameters.url,
-            rasterLayerToAdd.wmsParameters.parameterObject);
+        var newRasterLayer = L.tileLayer(rasterLayerToAdd.url, {
+            tms: rasterLayerToAdd.tms,
+            attribution: rasterLayerToAdd.attribution,
+        });
         this.mapElement.addLayer(newRasterLayer);
         this.rasterLayersOnMap.push({
-            parameters: rasterLayerToAdd.wmsParameters,
-            leafletLayer: newRasterLayer
+            name: rasterLayerToAdd.name,
+            leafletLayer: newRasterLayer,
         });
 
-
-        // var newLayer = L.tileLayer('data/raster/nolli_map_reprojected/{z}/{x}/{y}.png', {tms: true});
-        // this.mapElement.addLayer(newLayer);
     }
 
     /*
@@ -75,7 +73,7 @@ var MapView = function(layers) {
     this.removeRasterLayer = function(rasterLayerToRemove) {
         //  gets a reference to the existing layer on the map
         var rasterLayerOnMap = this.rasterLayersOnMap.filter(function(rasterLayerOnMap) {
-            return rasterLayerToRemove.wmsParameters === rasterLayerOnMap.parameters;
+            return rasterLayerToRemove.name === rasterLayerOnMap.name;
         })[0];
         this.mapElement.removeLayer(rasterLayerOnMap.leafletLayer);
         var index = this.rasterLayersOnMap.indexOf(rasterLayerOnMap);
@@ -103,7 +101,7 @@ var MapView = function(layers) {
         });
         this.mapElement.addLayer(newVectorLayer);
         this.vectorLayersOnMap.push({
-            parameters: vectorLayerToAdd.wfsParameters,
+            name: vectorLayerToAdd.name,
             leafletLayer: newVectorLayer,
         });
     }
@@ -114,7 +112,7 @@ var MapView = function(layers) {
     this.removeVectorLayer = function(vectorLayerToRemove) {
         //  gets a reference to the existing layer on the map
         var vectorLayerOnMap = this.vectorLayersOnMap.filter(function(vectorLayerOnMap) {
-            return vectorLayerToRemove.wfsParameters === vectorLayerOnMap.parameters;
+            return vectorLayerToRemove.name === vectorLayerOnMap.name;
         })[0];
         this.mapElement.removeLayer(vectorLayerOnMap.leafletLayer);
         var index = this.vectorLayersOnMap.indexOf(vectorLayerOnMap);
@@ -130,7 +128,6 @@ var MapView = function(layers) {
     *   Displays a given feature's details as a popup
     */
     this.showFeatureDetails = function(feature) {
-
         //  add the layer name and all details to the HTML element
         var detailsElement = document.createElement('div');
         var fields = [];
@@ -158,12 +155,9 @@ var MapView = function(layers) {
         }
 
         //  create the popup, save it and open it on the map
-        var latlng;
-        if (feature.geometry.type === 'Point') {
-            latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-        } else {
-            latlng = [feature.geometry.coordinates[0][0][0][1], feature.geometry.coordinates[0][0][0][0]];
-        }
+        var lnglat = feature.geometry.coordinates;
+        while (typeof(lnglat[0]) !== 'number') lnglat = lnglat[0];
+        var latlng = [lnglat[1], lnglat[0]];
 
         this.popup = L.popup()
             .setLatLng(latlng)
@@ -172,6 +166,7 @@ var MapView = function(layers) {
 
         //  pan to the popup on the map
         this.mapElement.panTo(latlng);
+        console.log(feature);
 
     };
 

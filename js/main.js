@@ -74,7 +74,7 @@
             /*
             *   Displays an initial map from the initial map settings.
             */
-//            controller.displayInitialMap();
+            controller.displayInitialMap();
 
         });
 

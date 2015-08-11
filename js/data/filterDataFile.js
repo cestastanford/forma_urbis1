@@ -103,7 +103,7 @@ var filterDataFileObject = {
 
             ],
             run: function(data, input) {
-                return (data === input);
+                return (data.indexOf(input) > -1);
             }
         },
     ],
@@ -180,12 +180,12 @@ var filterDataFileObject = {
         },
         uniqueID: {
 
-            inputDefault: 'unknown-array',
-            'unknown': function(input) {
-                return String(input);
+            inputDefault: 'mixed-case-array',
+            'mixed-case': function(input) {
+                return input.toLowerCase();
             },
-            'unknown-array': function(input) {
-                return String(input[0]);
+            'mixed-case-array': function(input) {
+                return input[0].toLowerCase();
             },
 
         },

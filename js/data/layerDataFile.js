@@ -24,20 +24,21 @@ var layerDataFileObject = {
     *   }
     */
 
-        //  Nolli Map
-        // {
-        //     name: "Nolli Map",
-        //     type: 'raster',
-        //     wmsParameters: {
-        //         url: "http://localhost:8080/geoserver/wms",
-        //         parameterObject: {
-        //             layers: "fur:nolli_map_reprojected",
-        //             format: "image/png",
-        //             attribution: "Nolli Map",
-        //             transparent: true
-        //         }
-        //     }
-        // },
+        {
+            name: "Nolli Map",
+            type: 'raster',
+            url: 'data/raster/nolli_map/{z}/{x}/{y}.png',
+            tms: true,
+        },
+
+        {
+            name: "Open Street Map",
+            type: 'raster',
+            url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            tms: false,
+        },
+
     ],
 
     vector: [
@@ -52,7 +53,6 @@ var layerDataFileObject = {
     *               service: 'WFS',
     *               version: '1.0.0',
     *               request: 'GetFeature',
-    *               typeName: 'fur:nolli_points_reprojected',
     *               outputFormat: 'text/javascript',
     *               format_options: 'callback:getJson'
     *           }
@@ -72,18 +72,7 @@ var layerDataFileObject = {
         //  Nolli Points Golden (reprojected)
         {
             name: 'Nolli Points',
-            dataName: 'nolli_points',
-            wfsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
-                data: {
-                    service: 'WFS',
-                    version: '1.0.0',
-                    request: 'GetFeature',
-                    typeName: 'fur:nolli_points',
-                    outputFormat: 'text/javascript',
-                    format_options: 'callback:JSONP_responses'
-                }
-            },
+            resource: 'vector/nolli_points.geojson',
             topField: 0,
             fields: [
                 {
@@ -154,7 +143,7 @@ var layerDataFileObject = {
                     name: 'NOLLI_ID',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Nolli ID',
                     description: 'The Nolli ID of the feature from the Nolli Map (same as Nolli Number).'
                 },
@@ -170,7 +159,7 @@ var layerDataFileObject = {
                     name: 'NOLLI_NUMB',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Nolli Number',
                     description: 'The Nolli Number of the feature from the Nolli Map (same as Nolli ID).'
                 },
@@ -210,18 +199,7 @@ var layerDataFileObject = {
         },
         {
             name: 'Domes',
-            dataName: 'domes',
-            wfsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
-                data: {
-                    service: 'WFS',
-                    version: '1.0.0',
-                    request: 'GetFeature',
-                    typeName: 'fur:domes',
-                    outputFormat: 'text/javascript',
-                    format_options: 'callback:JSONP_responses'
-                }
-            },
+            resource: 'vector/domes.geojson',
             topField: 2,
             fields: [
 
@@ -237,7 +215,7 @@ var layerDataFileObject = {
                     name: 'Building_I',
                     type: 'uniqueID',
                     subtype: '',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Building_I',
                     description: 'Unknown field.'
                 },
@@ -253,7 +231,7 @@ var layerDataFileObject = {
                     name: 'Dome_ID',
                     type: 'uniqueID',
                     subtype: '',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Dome ID',
                     description: 'Dome identification number.'
                 },
@@ -293,7 +271,7 @@ var layerDataFileObject = {
                     name: 'Nolli_Numb',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Nolli Number',
                     description: 'The number of the feature from the Nolli map.'
                 },
@@ -334,25 +312,14 @@ var layerDataFileObject = {
         },
         {
             name: 'Scavi Points',
-            dataName: 'scavi_points',
-            wfsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
-                data: {
-                    service: 'WFS',
-                    version: '1.0.0',
-                    request: 'GetFeature',
-                    typeName: 'fur:scavi_points',
-                    outputFormat: 'text/javascript',
-                    format_options: 'callback:JSONP_responses'
-                }
-            },
+            resource: 'vector/scavi_points.geojson',
             topField: 0,
             fields: [
                 {
                     name: 'ACCENSION_',
                     type: 'uniqueID',
                     subtype: 'lanciani',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Accension Number',
                     description: 'Reference to the plate and scavi number on the Lanciani map.'
                 },
@@ -431,34 +398,12 @@ var layerDataFileObject = {
         },
         {
             name: 'Lanciani Streets',
-            dataName: 'lanciani_streets',
-            wfsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
-                data: {
-                    service: 'WFS',
-                    version: '1.0.0',
-                    request: 'GetFeature',
-                    typeName: 'fur:lanciani_streets',
-                    outputFormat: 'text/javascript',
-                    format_options: 'callback:JSONP_responses'
-                }
-            },
+            resource: 'vector/lanciani_streets.geojson',
             fields: []
         },
         {
             name: 'Landscape Elements',
-            dataName: 'landscape_elements',
-            wfsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
-                data: {
-                    service: 'WFS',
-                    version: '1.0.0',
-                    request: 'GetFeature',
-                    typeName: 'fur:landscape_elements',
-                    outputFormat: 'text/javascript',
-                    format_options: 'callback:JSONP_responses'
-                }
-            },
+            resource: 'vector/landscape_elements.geojson',
             topField: 1,
             fields: [
 
@@ -482,7 +427,7 @@ var layerDataFileObject = {
                     name: 'NN',
                     type: 'uniqueID',
                     subtype: 'nolli',
-                    format: 'unknown',
+                    format: 'mixed-case',
                     displayName: 'Nolli Number',
                     description: 'The ID number of the feature from the Nolli map.'
                 },
@@ -499,18 +444,7 @@ var layerDataFileObject = {
         },
         {
             name: 'Tiber',
-            dataName: 'tiber',
-            wfsParameters: {
-                url: "http://localhost:8080/geoserver/ows",
-                data: {
-                    service: 'WFS',
-                    version: '1.0.0',
-                    request: 'GetFeature',
-                    typeName: 'fur:tiber',
-                    outputFormat: 'text/javascript',
-                    format_options: 'callback:JSONP_responses'
-                }
-            },
+            resource: 'vector/tiber.geojson',
             fields: [
                 {
                     name: 'CLASS',

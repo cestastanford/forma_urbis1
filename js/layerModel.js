@@ -68,56 +68,37 @@ var LayerModel = function(layerData) {
 
         var counter = Math.floor(Math.random() * 360);
 
-        // var layersToLoad = layerData.vector.length;
-        // var layerLoads = [];
-        // window.JSONP_responses = [];
-        // for (var i = 0; i < layersToLoad; i++) {
-        //     var layer = layerData.vector[i];
-        //     var layerLoad = new Promise(function(resolve) {
-        //         var jsonpRequest = document.createElement('script');
-        //         jsonpRequest.type = 'text/javascript';
-        //         var queryString = Object.keys(layer.wfsParameters.data).reduce(function(a,k){a.push(k+'='+encodeURIComponent(layer.wfsParameters.data[k]));return a},[]).join('&');
-        //         jsonpRequest.src = layer.wfsParameters.url + '?' + queryString + '[' + i + ']';
-        //         console.log(jsonpRequest.src);
-        //         window.JSONP_responses[i] = resolve;
-        //         $('#jsonp-download').append(jsonpRequest);
-        //     });
+        var layersToLoad = layerData.vector.length;
+        var requests = [];
 
-        //     //  on return, add each layer to the array.
-        //     layerLoad.then((function(layer, response) {
 
-        //         layer.geoJSON = response;
-        //         if (!layer.color) {
-        //             var hue = counter * 80;
-        //             counter += 1;
-        //             layer.color = 'hsl(' + hue + ', 100%, 65%)';
-        //         }
-        //     }).bind(undefined, layer));
-
-        //     layerLoads.push(layerLoad);
-        // }
-
-        // Promise.all(layerLoads).then((function() {
-        //     this.vector = layerData.vector;
-        //     this.getTypes();
-        //     callback();
-
-        // }).bind(this));
-        //
-
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < layersToLoad; i++) {
             var layer = layerData.vector[i];
-            layer.geoJSON = window[layer.dataName];
-            console.log(layer);
-            if (!layer.color) {
-                var hue = counter * 80;
-                counter += 1;
-                layer.color = 'hsl(' + hue + ', 100%, 65%)';
-            }
+            var request = Promise.resolve($.getJSON("data/" + layer.resource));
+            //  on return, add each layer to the array.
+            request.then((function(layer, data) {
+                layer.geoJSON = data;
+                if (!layer.color) {
+                    var hue = counter * 80;
+                    counter += 1;
+                    layer.color = 'hsl(' + hue + ', 100%, 65%)';
+                }
+
+            }).bind(undefined, layer))
+            .catch(function(jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err, jqxhr);
+            });
+
+            requests.push(request);
         }
-        this.vector = layerData.vector;
-        this.getTypes();
-        callback();
+
+        Promise.all(requests).then((function() {
+            this.vector = layerData.vector;
+            this.getTypes();
+            callback();
+
+        }).bind(this));
 
     };
 

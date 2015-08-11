@@ -55,7 +55,7 @@ var MapController = function(layers, filterEngine, map, results) {
 
             //  find the filtered layer
             var layerInFilteredList = this.addedFilteredVectorLayers.filter(function(addedFilteredVectorLayer) {
-                return addedFilteredVectorLayer.wfsParameters === vectorLayer.wfsParameters;
+                return addedFilteredVectorLayer.name === vectorLayer.name;
             })[0];
             var index = this.addedFilteredVectorLayers.indexOf(layerInFilteredList);
 
@@ -115,7 +115,7 @@ var MapController = function(layers, filterEngine, map, results) {
 
                 //  remove from filtered layer list
                 var layerInFilteredList = this.addedFilteredVectorLayers.filter(function(addedFilteredVectorLayer) {
-                    return addedFilteredVectorLayer.wfsParameters === layer.wfsParameters;
+                    return addedFilteredVectorLayer.name === layer.name;
                 })[0];
                 var index = this.addedFilteredVectorLayers.indexOf(layerInFilteredList);
                 this.addedFilteredVectorLayers.splice(index, 1);
@@ -128,6 +128,5 @@ var MapController = function(layers, filterEngine, map, results) {
             }
         }
     };
-
 
 };
